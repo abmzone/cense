@@ -127,5 +127,5 @@ on conflict do nothing;
 
 -- Homepage banner ---------------------------------------------------------
 insert into banners (key, heading, subheading, cta_label, cta_href, is_active)
-values ('home-hero', 'Where devotion becomes fragrance.', 'Handcrafted incense from Assam, made from flowers offered at the Kamakhya Temple.', 'Explore Collection', '/shop', true)
+values ('home-hero', 'Where devotion becomes fragrance.', 'Handcrafted incense from Assam, made from flowers offered at the Kamakhya Temple.', 'Shop Now', '/shop', true)
 on conflict (key) do nothing;
