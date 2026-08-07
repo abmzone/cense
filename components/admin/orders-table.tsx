@@ -1,0 +1,128 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import Link from "next/link";
+import { formatINR } from "@/lib/utils";
+import type { OrderStatus } from "@/lib/types";
+
+export interface AdminOrderRow {
+  id: string;
+  order_number: string;
+  email: string;
+  status: OrderStatus;
+  total: number;
+  created_at: string;
+}
+
+const STATUSES: OrderStatus[] = [
+  "pending",
+  "confirmed",
+  "packed",
+  "shipped",
+  "delivered",
+  "cancelled",
+];
+
+export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<OrderStatus | "all">("all");
+
+  const filtered = useMemo(() => {
+    return orders.filter((order) => {
+      const matchesSearch =
+        !search ||
+        order.order_number.toLowerCase().includes(search.toLowerCase()) ||
+        order.email.toLowerCase().includes(search.toLowerCase());
+      const matchesStatus = statusFilter === "all" || order.status === statusFilter;
+      return matchesSearch && matchesStatus;
+    });
+  }, [orders, search, statusFilter]);
+
+  function exportCsv() {
+    const header = ["Order Number", "Email", "Status", "Total", "Date"];
+    const rows = filtered.map((o) => [
+      o.order_number,
+      o.email,
+      o.status,
+      (o.total / 100).toFixed(2),
+      new Date(o.created_at).toISOString(),
+    ]);
+    const csv = [header, ...rows].map((row) => row.join(",")).join("\n");
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "cense-orders.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  return (
+    <div>
+      <div className="flex flex-wrap items-center gap-3">
+        <input
+          placeholder="Search order number or email"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="border border-ink/20 bg-transparent px-3 py-2 text-sm focus:border-maroon focus:outline-none"
+        />
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value as OrderStatus | "all")}
+          className="border border-ink/20 bg-transparent px-3 py-2 text-sm focus:border-maroon focus:outline-none"
+        >
+          <option value="all">All statuses</option>
+          {STATUSES.map((s) => (
+            <option key={s} value={s}>
+              {s}
+            </option>
+          ))}
+        </select>
+        <button
+          onClick={exportCsv}
+          className="ml-auto border border-ink/30 px-4 py-2 text-xs uppercase tracking-widest text-ink hover:border-maroon hover:text-maroon"
+        >
+          Export CSV
+        </button>
+      </div>
+
+      <div className="mt-6 overflow-x-auto">
+        <table className="w-full min-w-[600px] border-collapse text-sm">
+          <thead>
+            <tr className="border-b border-line text-left text-xs uppercase tracking-widest text-ink-soft">
+              <th className="pb-3">Order</th>
+              <th className="pb-3">Email</th>
+              <th className="pb-3">Status</th>
+              <th className="pb-3 text-right">Total</th>
+              <th className="pb-3 text-right">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.map((order) => (
+              <tr key={order.id} className="border-b border-line">
+                <td className="py-3">
+                  <Link href={`/admin/orders/${order.id}`} className="text-ink hover:text-maroon">
+                    {order.order_number}
+                  </Link>
+                </td>
+                <td className="py-3 text-ink-soft">{order.email}</td>
+                <td className="py-3 capitalize text-ink-soft">{order.status}</td>
+                <td className="py-3 text-right text-ink">{formatINR(order.total)}</td>
+                <td className="py-3 text-right text-ink-soft">
+                  {new Date(order.created_at).toLocaleDateString("en-IN")}
+                </td>
+              </tr>
+            ))}
+            {filtered.length === 0 && (
+              <tr>
+                <td colSpan={5} className="py-8 text-center text-ink-soft">
+                  No orders match your filters.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}

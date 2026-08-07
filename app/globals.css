@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  --color-paper: #ffffff;
+  --color-warm-white: #faf6f0;
+  --color-off-white: #f2ece2;
+  --color-ink: #211a17;
+  --color-ink-soft: #4a3f3a;
+  --color-maroon: #5b1a24;
+  --color-maroon-deep: #3f1119;
+  --color-terracotta: #ad6a4d;
+  --color-terracotta-soft: #c99274;
+  --color-gold: #b6954f;
+  --color-line: #e6ddd0;
+}
+
+@theme inline {
+  --color-paper: var(--color-paper);
+  --color-warm-white: var(--color-warm-white);
+  --color-off-white: var(--color-off-white);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-maroon: var(--color-maroon);
+  --color-maroon-deep: var(--color-maroon-deep);
+  --color-terracotta: var(--color-terracotta);
+  --color-terracotta-soft: var(--color-terracotta-soft);
+  --color-gold: var(--color-gold);
+  --color-line: var(--color-line);
+
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-cormorant);
+
+  --animate-fade-in: fade-in 0.8s ease forwards;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+body {
+  background: var(--color-warm-white);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+::selection {
+  background: var(--color-maroon);
+  color: var(--color-warm-white);
+}
+
+.container-editorial {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-editorial {
+    padding-inline: 3rem;
+  }
+}
+
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+}
