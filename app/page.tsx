@@ -40,9 +40,11 @@ export default async function HomePage() {
       {/* Hero */}
       <section className="relative flex min-h-[92vh] items-end overflow-hidden">
         <PlaceholderImage
-          alt="A single incense stick burning against a warm, minimal backdrop"
+          src="/hero-where-the-flowers-rested.png"
+          alt="Where the Flowers Rested incense box and sticks resting before the Kamakhya Temple at sunset"
           tone="woody"
           className="absolute inset-0 h-full w-full"
+          sizes="100vw"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
