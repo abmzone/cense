@@ -36,16 +36,9 @@ export const FALLBACK_PRODUCTS: Product[] = [
       {
         id: "img-1-1",
         product_id: "00000000-0000-0000-0000-000000000001",
-        url: "",
-        alt: "Where the Flowers Rested incense sticks resting on dried temple flowers",
+        url: "https://fpivffbugbajnoygqnur.supabase.co/storage/v1/object/public/product-images/where-the-flowers-rested-1.jpg",
+        alt: "Where the Flowers Rested incense box and sticks on a bed of rose, hibiscus, marigold and jasmine petals",
         position: 0,
-      },
-      {
-        id: "img-1-2",
-        product_id: "00000000-0000-0000-0000-000000000001",
-        url: "",
-        alt: "Close-up of rose and marigold petals used in Where the Flowers Rested",
-        position: 1,
       },
     ],
     variants: [
@@ -103,8 +96,8 @@ export const FALLBACK_PRODUCTS: Product[] = [
       {
         id: "img-2-1",
         product_id: "00000000-0000-0000-0000-000000000002",
-        url: "",
-        alt: "Rain Meets the Grass incense sticks on a bed of wet green grass",
+        url: "https://fpivffbugbajnoygqnur.supabase.co/storage/v1/object/public/product-images/rain-meets-the-grass-1.jpg",
+        alt: "Rain Meets the Grass incense box and sticks on rain-wet grass with butterfly pea and jasmine flowers",
         position: 0,
       },
     ],
@@ -163,8 +156,8 @@ export const FALLBACK_PRODUCTS: Product[] = [
       {
         id: "img-3-1",
         product_id: "00000000-0000-0000-0000-000000000003",
-        url: "",
-        alt: "Into the Forest incense sticks beside agarwood chips and dhuna resin",
+        url: "https://fpivffbugbajnoygqnur.supabase.co/storage/v1/object/public/product-images/into-the-forest-1.jpg",
+        alt: "Into the Forest incense box and sticks resting on a moss-covered log in a forest",
         position: 0,
       },
     ],
