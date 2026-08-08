@@ -80,6 +80,30 @@ values
   ('00000000-0000-0000-0003-000000000002', '00000000-0000-0000-0000-000000000003', '80g · 40 sticks', 80, 50, 88000, null, 55, 'CENSE-ITF-80')
 on conflict (id) do nothing;
 
+-- The Complete Collection (combo) ---------------------------------------------
+insert into products (id, slug, name, tagline, description, story, fragrance_notes, ingredients, directions, collection, seo_title, seo_description, tags)
+values (
+  '00000000-0000-0000-0000-000000000004',
+  'the-complete-collection',
+  'The Complete Collection',
+  'All three scents, one of each — floral, fresh, and woody.',
+  'One 40g box of each Cense fragrance — Where the Flowers Rested, Rain Meets the Grass, and Into the Forest — together in one set.',
+  'Some mornings call for hibiscus and rose. Some call for rain on warm stone. Some call for the quiet of a forest. The Complete Collection is for when you are not sure which — one box of each, so the choice can wait until the moment asks for it.',
+  array['Hibiscus & Rose', 'Lemongrass & Rain', 'Agarwood & Dhuna'],
+  array['Reclaimed temple flowers (hibiscus, rose, marigold, jasmine)', 'Lemongrass, citronella, vetiver and patchouli essential oils', 'Assam agarwood', 'Karbi Anglong dhuna resin', 'Bamboo core', 'Joss powder binder'],
+  'Light the tip until it glows, then gently blow out the flame. Rest the stick in a heat-safe holder and allow the fragrance to settle in a ventilated room.',
+  'combo',
+  'The Complete Collection — All Three Cense Fragrances | Cense',
+  'One box each of Where the Flowers Rested, Rain Meets the Grass, and Into the Forest — the full Cense range in one gift set.',
+  array['combo', 'gift-set', 'bestseller']
+)
+on conflict (id) do nothing;
+
+insert into product_variants (id, product_id, label, weight_grams, burn_time_minutes, price, compare_at_price, stock, sku)
+values
+  ('00000000-0000-0000-0004-000000000001', '00000000-0000-0000-0000-000000000004', '3 x 40g Gift Set', 120, 45, 120000, 135000, 50, 'CENSE-COMBO-SET')
+on conflict (id) do nothing;
+
 -- Sample coupon ---------------------------------------------------------------
 insert into coupons (code, type, value, min_order_value, usage_limit, expires_at, is_active)
 values ('WELCOME10', 'percentage', 10, 0, 500, now() + interval '1 year', true)
@@ -129,3 +153,12 @@ on conflict do nothing;
 insert into banners (key, heading, subheading, cta_label, cta_href, is_active)
 values ('home-hero', 'Where devotion becomes fragrance.', 'Handcrafted incense from Assam, made from flowers offered at the Kamakhya Temple.', 'Shop Now', '/shop', true)
 on conflict (key) do nothing;
+
+-- Product photography -----------------------------------------------------
+insert into product_images (product_id, url, alt, "position")
+values
+  ('00000000-0000-0000-0000-000000000001', 'https://fpivffbugbajnoygqnur.supabase.co/storage/v1/object/public/product-images/where-the-flowers-rested-1.jpg', 'Where the Flowers Rested incense box and sticks on a bed of rose, hibiscus, marigold and jasmine petals', 0),
+  ('00000000-0000-0000-0000-000000000002', 'https://fpivffbugbajnoygqnur.supabase.co/storage/v1/object/public/product-images/rain-meets-the-grass-1.jpg', 'Rain Meets the Grass incense box and sticks on rain-wet grass with butterfly pea and jasmine flowers', 0),
+  ('00000000-0000-0000-0000-000000000003', 'https://fpivffbugbajnoygqnur.supabase.co/storage/v1/object/public/product-images/into-the-forest-1.jpg', 'Into the Forest incense box and sticks resting on a moss-covered log in a forest', 0),
+  ('00000000-0000-0000-0000-000000000004', 'https://fpivffbugbajnoygqnur.supabase.co/storage/v1/object/public/product-images/complete-collection-1.jpg', 'All three Cense incense boxes stacked together with loose sticks and a holder', 0)
+on conflict do nothing;

@@ -155,6 +155,7 @@ export function ProductForm({ product }: { product?: Product }) {
           <option value="floral">Floral</option>
           <option value="fresh">Fresh</option>
           <option value="woody">Woody</option>
+          <option value="combo">Combo</option>
         </select>
         <input
           placeholder="Tags (comma separated)"

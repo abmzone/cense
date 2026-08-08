@@ -186,4 +186,53 @@ export const FALLBACK_PRODUCTS: Product[] = [
       },
     ],
   },
+  {
+    id: "00000000-0000-0000-0000-000000000004",
+    slug: "the-complete-collection",
+    name: "The Complete Collection",
+    tagline: "All three scents, one of each — floral, fresh, and woody.",
+    description:
+      "One 40g box of each Cense fragrance — Where the Flowers Rested, Rain Meets the Grass, and Into the Forest — together in one set.",
+    story:
+      "Some mornings call for hibiscus and rose. Some call for rain on warm stone. Some call for the quiet of a forest. The Complete Collection is for when you are not sure which — one box of each, so the choice can wait until the moment asks for it.",
+    fragrance_notes: ["Hibiscus & Rose", "Lemongrass & Rain", "Agarwood & Dhuna"],
+    ingredients: [
+      "Reclaimed temple flowers (hibiscus, rose, marigold, jasmine)",
+      "Lemongrass, citronella, vetiver and patchouli essential oils",
+      "Assam agarwood",
+      "Karbi Anglong dhuna resin",
+      "Bamboo core",
+      "Joss powder binder",
+    ],
+    directions:
+      "Light the tip until it glows, then gently blow out the flame. Rest the stick in a heat-safe holder and allow the fragrance to settle in a ventilated room.",
+    collection: "combo",
+    is_active: true,
+    seo_title: "The Complete Collection — All Three Cense Fragrances | Cense",
+    seo_description:
+      "One box each of Where the Flowers Rested, Rain Meets the Grass, and Into the Forest — the full Cense range in one gift set.",
+    tags: ["combo", "gift-set", "bestseller"],
+    images: [
+      {
+        id: "img-4-1",
+        product_id: "00000000-0000-0000-0000-000000000004",
+        url: "https://fpivffbugbajnoygqnur.supabase.co/storage/v1/object/public/product-images/complete-collection-1.jpg",
+        alt: "All three Cense incense boxes stacked together with loose sticks and a holder",
+        position: 0,
+      },
+    ],
+    variants: [
+      {
+        id: "var-4-set",
+        product_id: "00000000-0000-0000-0000-000000000004",
+        label: "3 x 40g Gift Set",
+        weight_grams: 120,
+        burn_time_minutes: 45,
+        price: 120000,
+        compare_at_price: 135000,
+        stock: 50,
+        sku: "CENSE-COMBO-SET",
+      },
+    ],
+  },
 ];

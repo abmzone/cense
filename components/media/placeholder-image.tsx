@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-type Tone = "floral" | "fresh" | "woody" | "neutral";
+type Tone = "floral" | "fresh" | "woody" | "combo" | "neutral";
 
 const TONE_GRADIENTS: Record<Tone, string> = {
   floral: "from-[#5b1a24] via-[#8a3a3f] to-[#c99274]",
   fresh: "from-[#3f1119] via-[#ad6a4d] to-[#b6954f]",
   woody: "from-[#211a17] via-[#3f1119] to-[#5b1a24]",
+  combo: "from-[#5b1a24] via-[#b6954f] to-[#3f1119]",
   neutral: "from-[#f2ece2] via-[#e6ddd0] to-[#f2ece2]",
 };
 

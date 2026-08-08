@@ -38,7 +38,7 @@ export interface Product {
   fragrance_notes: string[];
   ingredients: string[];
   directions: string;
-  collection: "floral" | "fresh" | "woody";
+  collection: "floral" | "fresh" | "woody" | "combo";
   is_active: boolean;
   seo_title: string | null;
   seo_description: string | null;
