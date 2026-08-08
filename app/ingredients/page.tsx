@@ -26,13 +26,13 @@ const INGREDIENTS: Ingredient[] = [
     title: "Karbi Anglong Dhuna",
     tone: "woody",
     description:
-      "A resin harvested in the hills of Karbi Anglong, traditionally burned on its own for its warm, smoky character. We fold it into our blends for depth.",
+      "Known as Dhuna in Assamese and Hijung in Karbi, this frankincense is the sap of Canarium resiniferum — a large tree native to Assam and Bangladesh that thrives in moist tropical forest. Harvesters make incisions in the trunk, releasing a clear, reddish sap that hardens into a brownish gum. Traditionally burned on its own for its warm, smoky character, we fold it into our blends for depth.",
   },
   {
     title: "Natural Essential Oils",
     tone: "fresh",
     description:
-      "Lemongrass, vetiver and other essential oils sourced from Assam and Meghalaya — no synthetic fragrance oils are used in any Cense product.",
+      "Lemongrass, citronella, vetiver and patchouli, sourced from farms across Assam and Meghalaya — no synthetic fragrance oils are used in any Cense product.",
   },
   {
     title: "Joss Powder",

@@ -10,14 +10,14 @@ export const FALLBACK_PRODUCTS: Product[] = [
     id: "00000000-0000-0000-0000-000000000001",
     slug: "where-the-flowers-rested",
     name: "Where the Flowers Rested",
-    tagline: "Soft floral. Rose, jasmine, and the temple flowers themselves.",
+    tagline: "Soft floral. Hibiscus, rose, jasmine, and the temple flowers themselves.",
     description:
       "Crafted from flowers offered at the Kamakhya Temple, blended with Karbi Anglong dhuna, Assam agarwood and essential oils from Assam & Meghalaya.",
     story:
-      "Every morning, thousands of marigolds, roses and jasmine are offered at the Kamakhya Temple and, by evening, cleared away as waste. Where the Flowers Rested is our attempt to let that offering continue a little longer — the same petals, dried and reground by hand, folded back into a fragrance instead of a landfill.",
-    fragrance_notes: ["Rose", "Jasmine", "Temple flowers", "Soft musk"],
+      "Every morning, thousands of hibiscus, marigolds, roses and jasmine are offered at the Kamakhya Temple and, by evening, cleared away as waste. Where the Flowers Rested is our attempt to let that offering continue a little longer — the same petals, dried and reground by hand, folded back into a fragrance instead of a landfill.",
+    fragrance_notes: ["Hibiscus", "Rose", "Jasmine", "Temple flowers", "Soft musk"],
     ingredients: [
-      "Reclaimed temple flowers (rose, marigold, jasmine)",
+      "Reclaimed temple flowers (hibiscus, rose, marigold, jasmine)",
       "Karbi Anglong dhuna resin",
       "Assam agarwood powder",
       "Natural essential oils",

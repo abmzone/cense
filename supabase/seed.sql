@@ -11,11 +11,11 @@ values (
   '00000000-0000-0000-0000-000000000001',
   'where-the-flowers-rested',
   'Where the Flowers Rested',
-  'Soft floral. Rose, jasmine, and the temple flowers themselves.',
+  'Soft floral. Hibiscus, rose, jasmine, and the temple flowers themselves.',
   'Crafted from flowers offered at the Kamakhya Temple, blended with Karbi Anglong dhuna, Assam agarwood and essential oils from Assam & Meghalaya.',
-  'Every morning, thousands of marigolds, roses and jasmine are offered at the Kamakhya Temple and, by evening, cleared away as waste. Where the Flowers Rested is our attempt to let that offering continue a little longer.',
-  array['Rose', 'Jasmine', 'Temple flowers', 'Soft musk'],
-  array['Reclaimed temple flowers (rose, marigold, jasmine)', 'Karbi Anglong dhuna resin', 'Assam agarwood powder', 'Natural essential oils', 'Bamboo core', 'Joss powder binder'],
+  'Every morning, thousands of hibiscus, marigolds, roses and jasmine are offered at the Kamakhya Temple and, by evening, cleared away as waste. Where the Flowers Rested is our attempt to let that offering continue a little longer.',
+  array['Hibiscus', 'Rose', 'Jasmine', 'Temple flowers', 'Soft musk'],
+  array['Reclaimed temple flowers (hibiscus, rose, marigold, jasmine)', 'Karbi Anglong dhuna resin', 'Assam agarwood powder', 'Natural essential oils', 'Bamboo core', 'Joss powder binder'],
   'Light the tip until it glows, then gently blow out the flame. Rest the stick in a heat-safe holder and allow the fragrance to settle in a ventilated room.',
   'floral',
   'Where the Flowers Rested — Temple Flower Incense | Cense',
@@ -92,7 +92,7 @@ values
     'second-life-of-temple-flowers',
     'The Second Life of Temple Flowers',
     'Every day, tonnes of flowers are offered at temples across India and cleared away as waste by evening. Here is what happens when they aren''t.',
-    'Every day, tonnes of flowers are offered at temples across India — and cleared away as waste by evening. At the Kamakhya Temple, that means marigold, rose and jasmine, gathered in baskets and taken to the river or the landfill within hours of being offered.
+    'Every day, tonnes of flowers are offered at temples across India — and cleared away as waste by evening. At the Kamakhya Temple, that means hibiscus, marigold, rose and jasmine, gathered in baskets and taken to the river or the landfill within hours of being offered.
 
 Cense began with a simple question: what if those flowers had a second life? Working with a small collective of women in Assam, we now recover a portion of these temple flowers, dry them by hand, and grind them into a base for incense — blended with dhuna resin from Karbi Anglong and agarwood native to the region.
 

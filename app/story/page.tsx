@@ -36,8 +36,8 @@ export default function StoryPage() {
           <Reveal>
             <p className="font-serif text-2xl leading-relaxed text-ink md:text-3xl">
               Every morning at the Kamakhya Temple in Guwahati, thousands of flowers are
-              offered in devotion — marigold, rose, jasmine. By evening, almost all of them
-              are cleared away as waste.
+              offered in devotion — hibiscus, marigold, rose, jasmine. By evening, almost all
+              of them are cleared away as waste.
             </p>
           </Reveal>
 
