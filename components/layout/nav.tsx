@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Menu, ShoppingBag, User, X } from "lucide-react";
+import { Menu, ShoppingBag, X } from "lucide-react";
 import { MAIN_NAV, SITE } from "@/lib/constants";
 import { useCart } from "@/lib/cart-store";
 import { cn } from "@/lib/utils";
@@ -51,13 +51,6 @@ export function Nav() {
         </nav>
 
         <div className="flex items-center gap-5">
-          <Link
-            href="/account"
-            aria-label="Your account"
-            className="text-ink-soft transition-colors hover:text-maroon"
-          >
-            <User size={20} strokeWidth={1.5} />
-          </Link>
           <button
             aria-label={`Open cart, ${itemCount} items`}
             onClick={openCart}
