@@ -40,8 +40,8 @@ export default async function HomePage() {
       {/* Hero */}
       <section className="relative flex min-h-[92vh] items-end overflow-hidden">
         <PlaceholderImage
-          src="/hero-where-the-flowers-rested.png"
-          alt="Where the Flowers Rested incense box and sticks resting before the Kamakhya Temple at sunset"
+          src="/hero-temple-sunset.jpg"
+          alt="A single incense stick burning beside temple flowers and a lit brass diya, with the Kamakhya Temple at sunset in the background"
           tone="woody"
           className="absolute inset-0 h-full w-full"
           sizes="100vw"
