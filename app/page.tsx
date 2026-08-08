@@ -98,22 +98,6 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      {/* Why Cense */}
-      <section className="bg-off-white py-28">
-        <Container>
-          <Reveal>
-            <h2 className="max-w-lg font-serif text-4xl text-ink md:text-5xl">Why Cense</h2>
-          </Reveal>
-          <div className="mt-14 grid grid-cols-2 gap-8 md:grid-cols-4">
-            {WHY_CENSE.map((item, i) => (
-              <Reveal key={item.title} delay={i * 0.04}>
-                <WhyCenseCard {...item} />
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
-
       {/* Featured products */}
       <section className="py-28">
         <Container>
@@ -129,6 +113,22 @@ export default async function HomePage() {
             {products.map((product, i) => (
               <Reveal key={product.id} delay={i * 0.06}>
                 <ProductCard product={product} />
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Why Cense */}
+      <section className="bg-off-white py-28">
+        <Container>
+          <Reveal>
+            <h2 className="max-w-lg font-serif text-4xl text-ink md:text-5xl">Why Cense</h2>
+          </Reveal>
+          <div className="mt-14 grid grid-cols-2 gap-8 md:grid-cols-4">
+            {WHY_CENSE.map((item, i) => (
+              <Reveal key={item.title} delay={i * 0.04}>
+                <WhyCenseCard {...item} />
               </Reveal>
             ))}
           </div>
