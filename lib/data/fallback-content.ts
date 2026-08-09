@@ -83,8 +83,9 @@ export const FALLBACK_FAQS: Faq[] = [
 ];
 
 export const FALLBACK_SETTINGS: Settings = {
-  free_shipping_threshold: 99900,
+  free_shipping_threshold: 49900,
   standard_shipping_fee: 6900,
+  minimum_shipping_fee: 15000,
   tax_rate_percent: 0,
   cod_enabled: false,
 };

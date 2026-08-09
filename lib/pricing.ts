@@ -90,28 +90,39 @@ export async function computeOrderTotals(
     }
   }
 
+  const COURIER_BOX_FEE_PAISE = 1500; // ₹15, added to whatever rate is used, to cover packaging
+
   const settings = await getSettings();
   const taxableAmount = subtotal - discount;
 
-  let shippingFee = settings.standard_shipping_fee;
+  let shippingFee = 0;
 
-  if (taxableAmount >= settings.free_shipping_threshold) {
-    shippingFee = 0;
-  } else if (shipping?.destinationPincode) {
-    const totalWeightGrams = resolvedLines.reduce(
-      (sum, l) => sum + l.weightGrams * l.quantity,
-      0
-    );
-    const rate = await getShippingRate({
-      destinationPincode: shipping.destinationPincode,
-      weightGrams: totalWeightGrams,
-      paymentMode: shipping.paymentMode ?? "Prepaid",
-    });
-    // Falls back to the flat rate if Delhivery's rate lookup fails or the
-    // pincode isn't recognised — checkout should never block on this.
-    if (rate.ok && rate.amountPaise != null) {
-      shippingFee = rate.amountPaise;
+  if (taxableAmount < settings.free_shipping_threshold) {
+    shippingFee = settings.standard_shipping_fee;
+
+    if (shipping?.destinationPincode) {
+      const totalWeightGrams = resolvedLines.reduce(
+        (sum, l) => sum + l.weightGrams * l.quantity,
+        0
+      );
+      const rate = await getShippingRate({
+        destinationPincode: shipping.destinationPincode,
+        weightGrams: totalWeightGrams,
+        paymentMode: shipping.paymentMode ?? "Prepaid",
+      });
+      // Falls back to the flat rate if Delhivery's rate lookup fails or the
+      // pincode isn't recognised — checkout should never block on this.
+      if (rate.ok && rate.amountPaise != null) {
+        shippingFee = rate.amountPaise;
+      }
     }
+
+    // Courier box cost on top, then floor at the configured minimum —
+    // shipping should never come out cheaper than what it actually costs.
+    shippingFee = Math.max(
+      settings.minimum_shipping_fee,
+      shippingFee + COURIER_BOX_FEE_PAISE
+    );
   }
 
   const tax = Math.round((taxableAmount * settings.tax_rate_percent) / 100);

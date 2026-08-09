@@ -109,6 +109,7 @@ export interface Coupon {
 export interface Settings {
   free_shipping_threshold: number; // paise
   standard_shipping_fee: number; // paise
+  minimum_shipping_fee: number; // paise
   tax_rate_percent: number;
   cod_enabled: boolean;
 }

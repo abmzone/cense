@@ -5,8 +5,8 @@
 -- not display a separate tax line at all. Only set this above 0 once
 -- GST-registered, and re-add the "Tax" line in the checkout/invoice/order
 -- UI (removed for the same reason).
-insert into settings (id, free_shipping_threshold, standard_shipping_fee, tax_rate_percent, cod_enabled)
-values (1, 99900, 6900, 0, false)
+insert into settings (id, free_shipping_threshold, standard_shipping_fee, minimum_shipping_fee, tax_rate_percent, cod_enabled)
+values (1, 49900, 6900, 15000, 0, false)
 on conflict (id) do nothing;
 
 -- Where the Flowers Rested ---------------------------------------------------
@@ -30,8 +30,7 @@ on conflict (id) do nothing;
 
 insert into product_variants (id, product_id, label, weight_grams, burn_time_minutes, price, compare_at_price, stock, sku)
 values
-  ('00000000-0000-0000-0001-000000000001', '00000000-0000-0000-0000-000000000001', '40g · 20 sticks', 40, 45, 45000, null, 120, 'CENSE-WFR-40'),
-  ('00000000-0000-0000-0001-000000000002', '00000000-0000-0000-0000-000000000001', '80g · 40 sticks', 80, 45, 82000, 90000, 80, 'CENSE-WFR-80')
+  ('00000000-0000-0000-0001-000000000001', '00000000-0000-0000-0000-000000000001', '40g · 20 sticks', 40, 45, 8500, null, 120, 'CENSE-WFR-40')
 on conflict (id) do nothing;
 
 -- Rain Meets the Grass --------------------------------------------------------
@@ -55,8 +54,7 @@ on conflict (id) do nothing;
 
 insert into product_variants (id, product_id, label, weight_grams, burn_time_minutes, price, compare_at_price, stock, sku)
 values
-  ('00000000-0000-0000-0002-000000000001', '00000000-0000-0000-0000-000000000002', '40g · 20 sticks', 40, 40, 42000, null, 100, 'CENSE-RMG-40'),
-  ('00000000-0000-0000-0002-000000000002', '00000000-0000-0000-0000-000000000002', '80g · 40 sticks', 80, 40, 78000, null, 60, 'CENSE-RMG-80')
+  ('00000000-0000-0000-0002-000000000001', '00000000-0000-0000-0000-000000000002', '40g · 20 sticks', 40, 40, 8500, null, 100, 'CENSE-RMG-40')
 on conflict (id) do nothing;
 
 -- Into the Forest ---------------------------------------------------------
@@ -80,8 +78,7 @@ on conflict (id) do nothing;
 
 insert into product_variants (id, product_id, label, weight_grams, burn_time_minutes, price, compare_at_price, stock, sku)
 values
-  ('00000000-0000-0000-0003-000000000001', '00000000-0000-0000-0000-000000000003', '40g · 20 sticks', 40, 50, 48000, null, 90, 'CENSE-ITF-40'),
-  ('00000000-0000-0000-0003-000000000002', '00000000-0000-0000-0000-000000000003', '80g · 40 sticks', 80, 50, 88000, null, 55, 'CENSE-ITF-80')
+  ('00000000-0000-0000-0003-000000000001', '00000000-0000-0000-0000-000000000003', '40g · 20 sticks', 40, 50, 8500, null, 90, 'CENSE-ITF-40')
 on conflict (id) do nothing;
 
 -- The Complete Collection (combo) ---------------------------------------------
@@ -105,7 +102,7 @@ on conflict (id) do nothing;
 
 insert into product_variants (id, product_id, label, weight_grams, burn_time_minutes, price, compare_at_price, stock, sku)
 values
-  ('00000000-0000-0000-0004-000000000001', '00000000-0000-0000-0000-000000000004', '3 x 40g Gift Set', 120, 45, 120000, 135000, 50, 'CENSE-COMBO-SET')
+  ('00000000-0000-0000-0004-000000000001', '00000000-0000-0000-0000-000000000004', '3 x 40g Gift Set', 120, 45, 21000, 25500, 50, 'CENSE-COMBO-SET')
 on conflict (id) do nothing;
 
 -- Sample coupon ---------------------------------------------------------------
