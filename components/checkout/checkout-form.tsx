@@ -33,39 +33,51 @@ export function CheckoutForm({ codEnabled }: Props) {
   const [shippingFee, setShippingFee] = useState<number | null>(null);
   const [taxAmount, setTaxAmount] = useState<number | null>(null);
   const [discount, setDiscount] = useState(0);
+  const [ratingShipping, setRatingShipping] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const subtotal = cartSubtotal(lines);
+  const isCompletePincode = /^\d{6}$/.test(form.postalCode);
 
+  const cartLinePayload = useMemo(
+    () => lines.map((l) => ({ variantId: l.variantId, quantity: l.quantity })),
+    [lines]
+  );
+
+  // Debounced live estimate: pincode-based shipping rate only kicks in once
+  // a full 6-digit postal code is entered, otherwise this still resolves
+  // discount/tax/flat-rate shipping so the summary isn't blank.
   useEffect(() => {
-    fetch("/api/shipping/calculate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ subtotal: subtotal - discount }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setShippingFee(data.fee);
-        setTaxAmount(Math.round(((subtotal - discount) * data.taxRatePercent) / 100));
+    if (lines.length === 0) return;
+    setRatingShipping(isCompletePincode);
+    const timeout = setTimeout(() => {
+      fetch("/api/shipping/calculate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          lines: cartLinePayload,
+          couponCode,
+          postalCode: isCompletePincode ? form.postalCode : undefined,
+          paymentMode: paymentMethod === "cod" ? "COD" : "Prepaid",
+        }),
       })
-      .catch(() => {
-        setShippingFee(0);
-        setTaxAmount(0);
-      });
-  }, [subtotal, discount]);
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) throw new Error(data.error);
+          setShippingFee(data.fee);
+          setTaxAmount(data.tax);
+          setDiscount(data.discount);
+        })
+        .catch(() => {
+          setShippingFee(null);
+          setTaxAmount(null);
+        })
+        .finally(() => setRatingShipping(false));
+    }, 400);
 
-  useEffect(() => {
-    if (!couponCode) return;
-    fetch("/api/coupons/validate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ code: couponCode, subtotal }),
-    })
-      .then((res) => res.json())
-      .then((data) => setDiscount(data.valid ? data.discount : 0));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    return () => clearTimeout(timeout);
+  }, [cartLinePayload, couponCode, form.postalCode, isCompletePincode, paymentMethod, lines.length]);
 
   const estimatedTotal = useMemo(() => {
     if (shippingFee === null || taxAmount === null) return null;
@@ -95,16 +107,15 @@ export function CheckoutForm({ codEnabled }: Props) {
     country: form.country,
   };
 
-  const cartLinePayload = lines.map((l) => ({
-    variantId: l.variantId,
-    quantity: l.quantity,
-  }));
-
   async function payWithRazorpay() {
     const res = await fetch("/api/razorpay/create-order", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ lines: cartLinePayload, couponCode }),
+      body: JSON.stringify({
+        lines: cartLinePayload,
+        couponCode,
+        destinationPincode: form.postalCode,
+      }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error ?? "Could not start payment.");
@@ -333,7 +344,13 @@ export function CheckoutForm({ codEnabled }: Props) {
           <div className="flex justify-between text-ink-soft">
             <span>Shipping</span>
             <span className="text-ink">
-              {shippingFee === null ? "—" : shippingFee === 0 ? "Free" : formatINR(shippingFee)}
+              {ratingShipping
+                ? "Calculating..."
+                : shippingFee === null
+                  ? "—"
+                  : shippingFee === 0
+                    ? "Free"
+                    : formatINR(shippingFee)}
             </span>
           </div>
           <div className="flex justify-between text-ink-soft">
@@ -344,6 +361,11 @@ export function CheckoutForm({ codEnabled }: Props) {
             <span>Total</span>
             <span>{estimatedTotal === null ? "—" : formatINR(estimatedTotal)}</span>
           </div>
+          {!isCompletePincode && (
+            <p className="text-xs text-ink-soft">
+              Enter your full 6-digit postal code above for an accurate shipping rate.
+            </p>
+          )}
         </div>
 
         <Button

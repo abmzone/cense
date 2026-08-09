@@ -41,7 +41,10 @@ export async function POST(request: Request) {
 
   let totals;
   try {
-    totals = await computeOrderTotals(lines, couponCode);
+    totals = await computeOrderTotals(lines, couponCode, {
+      destinationPincode: shippingAddress?.postal_code,
+      paymentMode: "Prepaid",
+    });
   } catch {
     return NextResponse.json({ error: "Could not verify order contents." }, { status: 400 });
   }

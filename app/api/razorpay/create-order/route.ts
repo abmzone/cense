@@ -3,14 +3,17 @@ import { getRazorpayClient } from "@/lib/razorpay";
 import { computeOrderTotals } from "@/lib/pricing";
 
 export async function POST(request: Request) {
-  const { lines, couponCode } = await request.json();
+  const { lines, couponCode, destinationPincode } = await request.json();
 
   if (!Array.isArray(lines) || lines.length === 0) {
     return NextResponse.json({ error: "Your cart is empty." }, { status: 400 });
   }
 
   try {
-    const totals = await computeOrderTotals(lines, couponCode);
+    const totals = await computeOrderTotals(lines, couponCode, {
+      destinationPincode,
+      paymentMode: "Prepaid",
+    });
 
     if (totals.total <= 0) {
       return NextResponse.json({ error: "Order total must be greater than zero." }, { status: 400 });

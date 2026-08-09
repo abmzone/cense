@@ -1,5 +1,6 @@
 import { createAdminClient } from "./supabase/admin";
 import { getSettings } from "./data/settings";
+import { getShippingRate } from "./delhivery";
 
 export interface PricedLine {
   productId: string;
@@ -8,6 +9,7 @@ export interface PricedLine {
   variantLabel: string;
   unitPrice: number;
   quantity: number;
+  weightGrams: number;
 }
 
 export interface OrderTotals {
@@ -27,14 +29,15 @@ export interface OrderTotals {
  */
 export async function computeOrderTotals(
   lines: { variantId: string; quantity: number }[],
-  couponCode?: string | null
+  couponCode?: string | null,
+  shipping?: { destinationPincode?: string; paymentMode?: "Prepaid" | "COD" }
 ): Promise<OrderTotals> {
   const admin = createAdminClient();
 
   const variantIds = [...new Set(lines.map((l) => l.variantId))];
   const { data: variants, error } = await admin
     .from("product_variants")
-    .select("id, price, label, product_id, products(name)")
+    .select("id, price, label, weight_grams, product_id, products(name)")
     .in("id", variantIds);
 
   if (error || !variants || variants.length === 0) {
@@ -55,6 +58,7 @@ export async function computeOrderTotals(
       productName: productName ?? "Product",
       variantLabel: variant.label,
       unitPrice: variant.price,
+      weightGrams: variant.weight_grams,
       quantity: Math.max(1, Math.min(10, line.quantity)),
     };
   });
@@ -88,8 +92,28 @@ export async function computeOrderTotals(
 
   const settings = await getSettings();
   const taxableAmount = subtotal - discount;
-  const shippingFee =
-    taxableAmount >= settings.free_shipping_threshold ? 0 : settings.standard_shipping_fee;
+
+  let shippingFee = settings.standard_shipping_fee;
+
+  if (taxableAmount >= settings.free_shipping_threshold) {
+    shippingFee = 0;
+  } else if (shipping?.destinationPincode) {
+    const totalWeightGrams = resolvedLines.reduce(
+      (sum, l) => sum + l.weightGrams * l.quantity,
+      0
+    );
+    const rate = await getShippingRate({
+      destinationPincode: shipping.destinationPincode,
+      weightGrams: totalWeightGrams,
+      paymentMode: shipping.paymentMode ?? "Prepaid",
+    });
+    // Falls back to the flat rate if Delhivery's rate lookup fails or the
+    // pincode isn't recognised — checkout should never block on this.
+    if (rate.ok && rate.amountPaise != null) {
+      shippingFee = rate.amountPaise;
+    }
+  }
+
   const tax = Math.round((taxableAmount * settings.tax_rate_percent) / 100);
   const total = taxableAmount + shippingFee + tax;
 
