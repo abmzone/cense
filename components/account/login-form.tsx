@@ -2,12 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 
 export function LoginForm() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -24,8 +22,10 @@ export function LoginForm() {
       setError(error.message);
       return;
     }
-    router.push("/account");
-    router.refresh();
+    // Hard navigation: gives the browser a moment to commit the new
+    // session cookie before the next (server-rendered) page checks it,
+    // avoiding a race that bounces back to /account/login.
+    window.location.href = "/account";
   }
 
   return (

@@ -1,12 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 
 export function AdminLoginForm() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -23,8 +21,7 @@ export function AdminLoginForm() {
       setError(error.message);
       return;
     }
-    router.push("/admin");
-    router.refresh();
+    window.location.href = "/admin";
   }
 
   return (

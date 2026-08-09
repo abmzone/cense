@@ -2,12 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 
 export function SignupForm() {
-  const router = useRouter();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,8 +29,7 @@ export function SignupForm() {
       return;
     }
     if (data.session) {
-      router.push("/account");
-      router.refresh();
+      window.location.href = "/account";
     } else {
       setDone(true);
     }
