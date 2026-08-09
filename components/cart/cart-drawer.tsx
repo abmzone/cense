@@ -8,6 +8,7 @@ import { PlaceholderImage } from "@/components/media/placeholder-image";
 import { QuantitySelector } from "@/components/shop/quantity-selector";
 import { ButtonLink } from "@/components/ui/button";
 import { formatINR } from "@/lib/utils";
+import { useMinimumOrderValue } from "@/lib/hooks/use-minimum-order-value";
 
 export function CartDrawer() {
   const isOpen = useCart((s) => s.isOpen);
@@ -16,6 +17,8 @@ export function CartDrawer() {
   const updateQuantity = useCart((s) => s.updateQuantity);
   const removeLine = useCart((s) => s.removeLine);
   const subtotal = cartSubtotal(lines);
+  const minimumOrderValue = useMinimumOrderValue();
+  const belowMinimum = subtotal < minimumOrderValue;
 
   return (
     <AnimatePresence>
@@ -103,9 +106,24 @@ export function CartDrawer() {
                 <p className="mb-4 text-xs text-ink-soft">
                   Shipping and taxes calculated at checkout.
                 </p>
-                <ButtonLink href="/checkout" className="w-full" onClick={close}>
-                  Checkout
-                </ButtonLink>
+                {belowMinimum ? (
+                  <>
+                    <button
+                      disabled
+                      className="w-full border border-ink/10 px-7 py-3 text-sm uppercase tracking-wide text-ink-soft/50"
+                    >
+                      Checkout
+                    </button>
+                    <p className="mt-2 text-center text-xs text-maroon">
+                      Add {formatINR(minimumOrderValue - subtotal)} more to reach the{" "}
+                      {formatINR(minimumOrderValue)} minimum order value.
+                    </p>
+                  </>
+                ) : (
+                  <ButtonLink href="/checkout" className="w-full" onClick={close}>
+                    Checkout
+                  </ButtonLink>
+                )}
                 <Link
                   href="/cart"
                   onClick={close}
