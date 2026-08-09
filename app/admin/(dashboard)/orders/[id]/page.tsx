@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { OrderStatusForm } from "@/components/admin/order-status-form";
+import { ShippingLabelButton } from "@/components/admin/shipping-label-button";
 import { formatINR } from "@/lib/utils";
 
 export default async function AdminOrderDetailPage({
@@ -105,19 +106,10 @@ export default async function AdminOrderDetailPage({
             currentStatus={order.status}
             currentTracking={order.tracking_number}
           />
-          <div className="border border-line p-6">
-            <p className="text-xs uppercase tracking-widest text-ink-soft">Shipping Label</p>
-            <p className="mt-2 text-xs text-ink-soft">
-              Requires a courier integration (e.g. Shiprocket, Delhivery). Wire up your courier&apos;s
-              API in <code>app/api/admin/orders/[id]/shipping-label</code> — see README.
-            </p>
-            <button
-              disabled
-              className="mt-4 w-full border border-ink/10 px-4 py-2 text-xs uppercase tracking-widest text-ink-soft/50"
-            >
-              Download Shipping Label
-            </button>
-          </div>
+          <ShippingLabelButton
+            orderId={order.id}
+            hasTrackingNumber={Boolean(order.tracking_number)}
+          />
         </div>
       </div>
     </div>

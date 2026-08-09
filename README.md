@@ -121,7 +121,32 @@ checkout/accounts/admin require a real Supabase project (step 2).
 5. All order totals (subtotal, discount, shipping, tax) are recomputed server-side in
    `lib/pricing.ts` from the live database — the client never gets to dictate what gets charged.
 
-## 4. Deploy
+## 4. Set up Delhivery (shipping labels)
+
+Order fulfillment (`app/api/admin/orders/[id]/shipping-label`, `lib/delhivery.ts`) creates a
+forward shipment via Delhivery's Order Creation API and fetches the packing slip/label, called
+from the **Shipping Label** button on an order's admin detail page.
+
+1. Get your API token from Delhivery's client portal (contact your BD/support rep if it's not
+   visible in your dashboard).
+2. Find your **exact** registered pickup/warehouse facility name and address — this must match
+   your Delhivery account precisely, or shipment creation fails.
+3. Add to `.env.local` / your host's environment variables: `DELHIVERY_API_TOKEN`,
+   `DELHIVERY_CLIENT_NAME`, `DELHIVERY_PICKUP_LOCATION`, `DELHIVERY_PICKUP_ADDRESS`,
+   `DELHIVERY_PICKUP_CITY`, `DELHIVERY_PICKUP_PINCODE`, `DELHIVERY_PICKUP_PHONE` (see
+   `.env.example` for the full list, including `DELHIVERY_HSN_CODE` and
+   `DELHIVERY_SELLER_GST_TIN`, which can be left blank if you aren't GST-registered — Delhivery
+   may still reject shipments without one depending on your account tier).
+4. **Delhivery's public API docs are sparse and response shapes have been reported to vary by
+   account.** The integration parses the commonly-documented response shape and logs the full
+   raw response to the browser console on every label-generation attempt — check that console
+   log first if a label doesn't come back as expected, and adjust the parsing in
+   `lib/delhivery.ts` (`createShipment` / `getShippingLabel`) to match what your account actually
+   returns.
+5. This calls Delhivery's **production** endpoint directly (no staging/sandbox step) — every
+   successful call creates a real shipment against your account.
+
+## 5. Deploy
 
 **Vercel:**
 
@@ -135,7 +160,7 @@ needed — `next build` runs as-is.
 
 **Supabase:** already hosted; just make sure the migration + seed ran in step 2.
 
-## 5. Build scripts
+## 6. Build scripts
 
 | Command | Purpose |
 | --- | --- |
@@ -175,9 +200,6 @@ aren't covered by that matcher.
 
 ## What's intentionally simplified for v1
 
-- **Shipping labels**: stubbed with a clear note in the order detail page — wire up your
-  courier (Shiprocket, Delhivery, etc.) in a new `app/api/admin/orders/[id]/shipping-label`
-  route once you've picked one.
 - **Invoices**: implemented as a print-optimized page (`/admin/orders/[id]/invoice`) using the
   browser's native "Print to PDF" — no server PDF library needed.
 - **CSV export / analytics**: client-side CSV export on the orders table; the dashboard's
