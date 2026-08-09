@@ -15,9 +15,9 @@ values (
   '00000000-0000-0000-0000-000000000001',
   'where-the-flowers-rested',
   'Where the Flowers Rested',
-  'Soft floral. Hibiscus, rose, jasmine, and the temple flowers themselves.',
-  'Crafted from flowers offered at the Kamakhya Temple, blended with Karbi Anglong dhuna, Assam agarwood and essential oils from Assam & Meghalaya.',
-  'Every morning, thousands of hibiscus, marigolds, roses and jasmine are offered at the Kamakhya Temple and, by evening, cleared away as waste. Where the Flowers Rested is our attempt to let that offering continue a little longer.',
+  'Floral · Soft · Devotional',
+  'The fragrance of devotion. Rose, hibiscus and jasmine offered at the Kamakhya Temple, carried into a soft floral incense blended with Karbi Anglong dhuna and Assam agarwood.',
+  'Every morning, hibiscus, marigolds, roses and jasmine are offered at the Kamakhya Temple as acts of devotion. Where the Flowers Rested carries a part of that offering forward — the same petals, dried and reground by hand, folded into a fragrance that lets the ritual travel beyond the temple.',
   array['Hibiscus', 'Rose', 'Jasmine', 'Temple flowers', 'Soft musk'],
   array['Reclaimed temple flowers (hibiscus, rose, marigold, jasmine)', 'Karbi Anglong dhuna resin', 'Assam agarwood powder', 'Natural essential oils', 'Bamboo core', 'Joss powder binder'],
   'Light the tip until it glows, then gently blow out the flame. Rest the stick in a heat-safe holder and allow the fragrance to settle in a ventilated room.',
@@ -39,8 +39,8 @@ values (
   '00000000-0000-0000-0000-000000000002',
   'rain-meets-the-grass',
   'Rain Meets the Grass',
-  'Fresh. Lemongrass, rain, and green botanicals.',
-  'Fresh lemongrass, rain-washed earth and green botanicals inspired by the monsoon across Northeast India.',
+  'Fresh · Green · Monsoon',
+  'The scent of an Assam monsoon. Fresh lemongrass, rain-washed earth and green botanicals, capturing the moment before the rains break over the valley.',
   'There is a particular smell that arrives just before the monsoon breaks over the Brahmaputra valley — wet earth, cut grass, the first rain on warm stone. Rain Meets the Grass is our attempt to hold onto that moment.',
   array['Lemongrass', 'Rain-washed earth', 'Green grass', 'Monsoon petrichor'],
   array['Lemongrass essential oil', 'Vetiver root', 'Natural petrichor accord', 'Assam agarwood powder', 'Bamboo core', 'Joss powder binder'],
@@ -63,8 +63,8 @@ values (
   '00000000-0000-0000-0000-000000000003',
   'into-the-forest',
   'Into the Forest',
-  'Deep woody. Agarwood, dhuna, and forest floor.',
-  'A deep woody blend inspired by the forests of Assam, resinous dhuna and native agarwood.',
+  'Woody · Resinous · Deep',
+  'The deep fragrance of Assam''s forests. Native agarwood and resinous dhuna, unhurried and quiet, drawn from the forests of the Northeast.',
   'Assam''s forests carry a scent of their own — resin, damp bark, and agarwood trees that have stood for generations. Into the Forest draws on Karbi Anglong dhuna and native agarwood to bring that depth indoors.',
   array['Agarwood', 'Dhuna resin', 'Forest floor', 'Eucalyptus'],
   array['Assam agarwood', 'Karbi Anglong dhuna resin', 'Eucalyptus essential oil', 'Natural essential oils', 'Bamboo core', 'Joss powder binder'],
@@ -87,8 +87,8 @@ values (
   '00000000-0000-0000-0000-000000000004',
   'the-complete-collection',
   'The Complete Collection',
-  'All three scents, one of each — floral, fresh, and woody.',
-  'One 40g box of each Cense fragrance — Where the Flowers Rested, Rain Meets the Grass, and Into the Forest — together in one set.',
+  'Three fragrances · One landscape',
+  'Bring the full Cense experience home. One 40g box of each fragrance — Where the Flowers Rested, Rain Meets the Grass, and Into the Forest — together in one set.',
   'Some mornings call for hibiscus and rose. Some call for rain on warm stone. Some call for the quiet of a forest. The Complete Collection is for when you are not sure which — one box of each, so the choice can wait until the moment asks for it.',
   array['Hibiscus & Rose', 'Lemongrass & Rain', 'Agarwood & Dhuna'],
   array['Reclaimed temple flowers (hibiscus, rose, marigold, jasmine)', 'Lemongrass, citronella, vetiver and patchouli essential oils', 'Assam agarwood', 'Karbi Anglong dhuna resin', 'Bamboo core', 'Joss powder binder'],
@@ -115,16 +115,16 @@ insert into journal_posts (slug, title, excerpt, content, published_at, seo_titl
 values
   (
     'second-life-of-temple-flowers',
-    'The Second Life of Temple Flowers',
-    'Every day, tonnes of flowers are offered at temples across India and cleared away as waste by evening. Here is what happens when they aren''t.',
-    'Every day, tonnes of flowers are offered at temples across India — and cleared away as waste by evening. At the Kamakhya Temple, that means hibiscus, marigold, rose and jasmine, gathered in baskets and taken to the river or the landfill within hours of being offered.
+    'From an Offering to a Fragrance',
+    'Every day, flowers are offered at the Kamakhya Temple as acts of devotion. Here is how a part of their story travels beyond the temple.',
+    'Every day, flowers are offered at the Kamakhya Temple as acts of devotion — hibiscus, marigold, rose and jasmine. After their ritual journey, Cense carefully collects a portion of these flowers, dries them by hand, and grinds them into a base for incense — blended with dhuna resin from Karbi Anglong and agarwood native to Assam.
 
-Cense began with a simple question: what if those flowers had a second life? Working with a small collective of women in Assam, we now recover a portion of these temple flowers, dry them by hand, and grind them into a base for incense — blended with dhuna resin from Karbi Anglong and agarwood native to the region.
+Cense began with a simple question: what if the spirit of a place could be experienced through fragrance? Working with a small collective of women artisans in Assam, we transform devotion into a scent that carries Kamakhya, and Assam, into the everyday rituals of a home.
 
-The result isn''t a religious product. It''s a fragrance house that happens to start where devotion ends, treating what was offered with the same care it was given the first time.',
+The result is not a religious product. It is a fragrance house that begins with devotion and ends at home, treating what was offered with the same care it was given the first time. By giving these flowers a second life, Cense also keeps valuable organic material from becoming waste — a quiet, secondary benefit of a process built around fragrance first.',
     '2026-01-12',
-    'The Second Life of Temple Flowers | Cense Journal',
-    'How Cense recovers flowers offered at the Kamakhya Temple and transforms them into premium incense, working with rural women across Assam.'
+    'From an Offering to a Fragrance | Cense Journal',
+    'How Cense transforms flowers offered at the Kamakhya Temple into handcrafted incense, working with women artisans across Assam.'
   ),
   (
     'why-charcoal-free-matters',
@@ -152,7 +152,7 @@ on conflict do nothing;
 
 -- Homepage banner ---------------------------------------------------------
 insert into banners (key, heading, subheading, cta_label, cta_href, is_active)
-values ('home-hero', 'Where devotion becomes fragrance.', 'Handcrafted incense from Assam, made from flowers offered at the Kamakhya Temple.', 'Shop Now', '/shop', true)
+values ('home-hero', 'Bring the spirit of Kamakhya home.', 'Handcrafted incense made from flowers offered at the Kamakhya Temple, blended with the natural fragrances of Assam.', 'Shop the Collection', '/shop', true)
 on conflict (key) do nothing;
 
 -- Product photography -----------------------------------------------------

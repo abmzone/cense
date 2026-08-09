@@ -23,20 +23,20 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — Where Devotion Becomes Fragrance`,
+    default: `${SITE.name} — Handcrafted Incense Rooted in Kamakhya`,
     template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
   openGraph: {
     type: "website",
     siteName: SITE.name,
-    title: `${SITE.name} — Where Devotion Becomes Fragrance`,
+    title: `${SITE.name} — Handcrafted Incense Rooted in Kamakhya`,
     description: SITE.description,
     url: SITE.url,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — Where Devotion Becomes Fragrance`,
+    title: `${SITE.name} — Handcrafted Incense Rooted in Kamakhya`,
     description: SITE.description,
   },
   alternates: {

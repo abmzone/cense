@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 
 export interface Ingredient {
   title: string;
+  region?: string;
   tone: "floral" | "fresh" | "woody" | "neutral";
   description: string;
 }
@@ -35,7 +36,14 @@ export function IngredientAccordion({ ingredients }: { ingredients: Ingredient[]
                 aria-expanded={isOpen}
                 className="flex w-full items-center justify-between py-6 text-left"
               >
-                <span className="font-serif text-2xl text-ink">{ingredient.title}</span>
+                <span>
+                  {ingredient.region && (
+                    <span className="block text-xs uppercase tracking-[0.2em] text-terracotta">
+                      {ingredient.region}
+                    </span>
+                  )}
+                  <span className="font-serif text-2xl text-ink">{ingredient.title}</span>
+                </span>
                 <Plus
                   size={20}
                   strokeWidth={1.5}

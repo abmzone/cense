@@ -7,14 +7,14 @@ import { ButtonLink } from "@/components/ui/button";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Cense's mission, process, and the women's collective across Assam behind every batch.",
+    "How Cense brings the spirit of Kamakhya home — the devotion, the flowers, the fragrance, and the women artisans of Assam behind every stick.",
 };
 
 const PROCESS_STEPS = [
   {
-    title: "Recovery",
+    title: "Devotion",
     description:
-      "Flowers offered at the Kamakhya Temple are collected before they are discarded as waste.",
+      "Flowers are offered at the Kamakhya Temple each day as acts of devotion, then carefully collected.",
   },
   {
     title: "Drying",
@@ -29,7 +29,7 @@ const PROCESS_STEPS = [
   {
     title: "Rolling",
     description:
-      "Each stick is hand-rolled onto a bamboo core by our collective of women artisans in small batches.",
+      "Each stick is hand-rolled onto a bamboo core by women artisans in Assam, in small batches.",
   },
   {
     title: "Curing & Packing",
@@ -46,39 +46,24 @@ export default function AboutPage() {
           <Reveal>
             <p className="text-xs uppercase tracking-[0.3em] text-terracotta">About Cense</p>
             <h1 className="mt-6 font-serif text-5xl leading-tight text-ink md:text-6xl">
-              A fragrance house rooted in Assam.
+              Cense began with a simple idea: what if the spirit of a place could be experienced
+              through fragrance?
             </h1>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-8 text-base leading-relaxed text-ink-soft">
-              Cense makes premium handcrafted incense from flowers offered at the Kamakhya
-              Temple, blended with natural ingredients sourced across Northeast India. We
-              exist to prove that devotion, craft and design can share the same shelf.
+              At the heart of Cense is Kamakhya — one of Assam&rsquo;s most powerful places of
+              devotion. Flowers offered at the temple form the beginning of our story. We
+              carefully transform them into handcrafted incense, combining them with natural
+              materials and fragrances inspired by the landscapes of Assam and the Northeast.
+            </p>
+            <p className="mt-6 text-base leading-relaxed text-ink-soft">
+              Every fragrance we make is built on the same idea: devotion at the start, Assam
+              throughout, and a scent that carries both into the everyday rituals of a home.
             </p>
             <ButtonLink href="/story" variant="ghost" className="mt-6 px-0">
               Read our full story
             </ButtonLink>
-          </Reveal>
-        </Container>
-      </section>
-
-      <section className="bg-off-white py-24">
-        <Container className="grid gap-16 md:grid-cols-2">
-          <Reveal>
-            <h2 className="font-serif text-3xl text-ink md:text-4xl">Our Mission</h2>
-            <p className="mt-6 text-base leading-relaxed text-ink-soft">
-              To divert temple flower waste into a genuinely premium product, made by rural
-              women in Assam, using only natural ingredients — proving that sustainable and
-              luxurious are not opposites.
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="font-serif text-3xl text-ink md:text-4xl">Sustainability</h2>
-            <p className="mt-6 text-base leading-relaxed text-ink-soft">
-              Every stick is charcoal-free, built on a natural joss powder binder. Packaging
-              favours paper and glass over plastic wherever possible, and our supply chain
-              stays within Assam and Meghalaya to keep transport emissions low.
-            </p>
           </Reveal>
         </Container>
       </section>
@@ -115,15 +100,38 @@ export default function AboutPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-xs uppercase tracking-[0.3em] text-warm-white/70">
-              Meet the Women
+              Made By Hand
             </p>
             <h2 className="mt-6 font-serif text-3xl md:text-4xl">
-              Every batch is hand-rolled by a collective of women across Assam.
+              Made by hand. Made to matter.
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-warm-white/80">
-              Cense works with a growing collective of rural women who dry, grind and roll
-              every stick by hand. Fair, consistent work close to home — building a livelihood
-              around a craft rather than a factory line.
+              Each Cense stick is hand-finished by women artisans in Assam. By working with
+              Self Help Groups, we support skilled hands, create meaningful local livelihoods
+              and keep traditional making at the heart of every box.
+            </p>
+          </Reveal>
+        </Container>
+      </section>
+
+      <section className="bg-off-white py-24">
+        <Container className="grid gap-16 md:grid-cols-2">
+          <Reveal>
+            <h2 className="font-serif text-3xl text-ink md:text-4xl">
+              Giving offerings another life.
+            </h2>
+            <p className="mt-6 text-base leading-relaxed text-ink-soft">
+              Rather than letting flowers offered at Kamakhya go to waste, Cense repurposes a
+              portion of them into fragrance — a small, factual by-product of a process built
+              around devotion and craft, not a marketing claim.
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h2 className="font-serif text-3xl text-ink md:text-4xl">Natural, by Design</h2>
+            <p className="mt-6 text-base leading-relaxed text-ink-soft">
+              Every stick is charcoal-free, built on a natural joss powder binder, with no
+              synthetic fragrance oils or phthalates. Packaging favours paper and glass over
+              plastic wherever possible.
             </p>
           </Reveal>
         </Container>

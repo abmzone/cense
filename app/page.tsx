@@ -1,4 +1,4 @@
-import { Flower2, HeartHandshake, Leaf, Sparkles, Recycle, PackageCheck, MapPin } from "lucide-react";
+import { Flower2, HeartHandshake, Leaf, Sparkles, Droplet, ShieldCheck, PackageCheck, MapPin } from "lucide-react";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
@@ -13,11 +13,12 @@ import { getBanner } from "@/lib/data/banners";
 export const dynamic = "force-dynamic";
 
 const WHY_CENSE = [
-  { icon: Flower2, title: "Flowers Offered at Kamakhya Temple", description: "Reclaimed rather than discarded, and given a second life as fragrance." },
-  { icon: HeartHandshake, title: "Made by Rural Women", description: "Handcrafted by a women's collective across Assam, batch by batch." },
-  { icon: Leaf, title: "Natural Ingredients", description: "No synthetic fragrance oils — only essential oils, resins and botanicals." },
-  { icon: Sparkles, title: "Charcoal Free", description: "A joss powder and natural binder base, for a lighter, cleaner burn." },
-  { icon: Recycle, title: "Plastic Conscious", description: "Packaging built to minimise plastic at every stage." },
+  { icon: HeartHandshake, title: "Handmade", description: "Hand-finished by women artisans in Assam, batch by batch." },
+  { icon: Flower2, title: "Temple Flowers", description: "Flowers offered at the Kamakhya Temple, carried into every stick." },
+  { icon: Leaf, title: "Natural Ingredients", description: "No synthetic fragrance oils — only resins, botanicals and natural binders." },
+  { icon: Droplet, title: "Essential Oils", description: "Scented with essential oils drawn from Assam and Meghalaya." },
+  { icon: Sparkles, title: "Charcoal Free", description: "A joss powder base, for a lighter, cleaner burn." },
+  { icon: ShieldCheck, title: "Phthalate Free", description: "No phthalates, in the incense or the fragrance." },
   { icon: PackageCheck, title: "Small Batch", description: "Made in limited quantities, never mass-produced." },
   { icon: MapPin, title: "Made in Assam", description: "Sourced and crafted entirely within Northeast India." },
 ];
@@ -25,7 +26,7 @@ const WHY_CENSE = [
 const INGREDIENT_HIGHLIGHTS = [
   { title: "Karbi Anglong Dhuna", description: "A resin harvested in the hills of Karbi Anglong, prized for its deep, smoky warmth." },
   { title: "Assam Agarwood", description: "Native agarwood, aged and ground for a fragrance that is quiet rather than loud." },
-  { title: "Temple Flowers, Recycled", description: "Rose, marigold and jasmine offered at Kamakhya, dried and returned as scent." },
+  { title: "Kamakhya Temple Flowers", description: "Rose, marigold and jasmine offered at Kamakhya, dried and carried into every stick." },
 ];
 
 export default async function HomePage() {
@@ -70,7 +71,7 @@ export default async function HomePage() {
                 {heroBanner.cta_label || "Shop Now"}
               </ButtonLink>
               <ButtonLink href="/story" variant="secondary" className="border-warm-white/60 text-warm-white hover:border-warm-white">
-                Explore Collection
+                Our Story
               </ButtonLink>
             </div>
           </Reveal>
@@ -83,15 +84,13 @@ export default async function HomePage() {
           <Reveal>
             <p className="text-xs uppercase tracking-[0.3em] text-terracotta">Our Story</p>
             <h2 className="mt-6 font-serif text-4xl leading-tight text-ink md:text-5xl">
-              Every day, temple flowers become waste. We give them a second life.
+              A fragrance born in Assam. A ritual brought home.
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-base leading-relaxed text-ink-soft">
-              At the Kamakhya Temple, thousands of flowers are offered each morning and cleared
-              away by evening. Cense recovers a portion of these flowers, dries them by hand, and
-              blends them with dhuna resin and agarwood native to Assam — transforming an
-              offering into an incense that carries the same care it was given the first time.
+              Cense brings together the devotion of Kamakhya, the landscapes of Assam and the
+              craft of its people — shaped into incense for everyday rituals at home.
             </p>
             <ButtonLink href="/story" variant="ghost" className="mt-6 px-0">
               Read the full story

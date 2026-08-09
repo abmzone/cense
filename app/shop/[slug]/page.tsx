@@ -103,11 +103,6 @@ export default async function ProductPage({ params }: PageProps<"/shop/[slug]">)
 
           <div className="mt-14 space-y-10">
             <div>
-              <h2 className="font-serif text-xl text-ink">Story</h2>
-              <p className="mt-3 text-sm leading-relaxed text-ink-soft">{product.story}</p>
-            </div>
-
-            <div>
               <h2 className="font-serif text-xl text-ink">Fragrance Notes</h2>
               <ul className="mt-3 flex flex-wrap gap-2">
                 {product.fragrance_notes.map((note) => (
@@ -122,6 +117,11 @@ export default async function ProductPage({ params }: PageProps<"/shop/[slug]">)
             </div>
 
             <div>
+              <h2 className="font-serif text-xl text-ink">Story</h2>
+              <p className="mt-3 text-sm leading-relaxed text-ink-soft">{product.story}</p>
+            </div>
+
+            <div>
               <h2 className="font-serif text-xl text-ink">Ingredients</h2>
               <ul className="mt-3 space-y-1 text-sm text-ink-soft">
                 {product.ingredients.map((ingredient) => (
@@ -131,8 +131,17 @@ export default async function ProductPage({ params }: PageProps<"/shop/[slug]">)
             </div>
 
             <div>
-              <h2 className="font-serif text-xl text-ink">Directions</h2>
+              <h2 className="font-serif text-xl text-ink">How to Use</h2>
               <p className="mt-3 text-sm leading-relaxed text-ink-soft">{product.directions}</p>
+            </div>
+
+            <div className="border-t border-line pt-10">
+              <h2 className="font-serif text-xl text-ink">Craft &amp; Origin</h2>
+              <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+                Hand-finished by women artisans in Assam, in small batches, on a charcoal-free
+                joss powder base. Every stick carries the same natural ingredients and craft as
+                the offering it began with.
+              </p>
             </div>
           </div>
         </Reveal>

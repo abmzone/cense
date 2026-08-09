@@ -4,16 +4,16 @@ export const FALLBACK_JOURNAL_POSTS: JournalPost[] = [
   {
     id: "post-1",
     slug: "second-life-of-temple-flowers",
-    title: "The Second Life of Temple Flowers",
+    title: "From an Offering to a Fragrance",
     excerpt:
-      "Every day, tonnes of flowers are offered at temples across India and cleared away as waste by evening. Here is what happens when they aren't.",
+      "Every day, flowers are offered at the Kamakhya Temple as acts of devotion. Here is how a part of their story travels beyond the temple.",
     content:
-      "Every day, tonnes of flowers are offered at temples across India — and cleared away as waste by evening. At the Kamakhya Temple, that means hibiscus, marigold, rose and jasmine, gathered in baskets and taken to the river or the landfill within hours of being offered.\n\nCense began with a simple question: what if those flowers had a second life? Working with a small collective of women in Assam, we now recover a portion of these temple flowers, dry them by hand, and grind them into a base for incense — blended with dhuna resin from Karbi Anglong and agarwood native to the region.\n\nThe result isn't a religious product. It's a fragrance house that happens to start where devotion ends, treating what was offered with the same care it was given the first time.",
+      "Every day, flowers are offered at the Kamakhya Temple as acts of devotion — hibiscus, marigold, rose and jasmine. After their ritual journey, Cense carefully collects a portion of these flowers, dries them by hand, and grinds them into a base for incense — blended with dhuna resin from Karbi Anglong and agarwood native to Assam.\n\nCense began with a simple question: what if the spirit of a place could be experienced through fragrance? Working with a small collective of women artisans in Assam, we transform devotion into a scent that carries Kamakhya, and Assam, into the everyday rituals of a home.\n\nThe result isn't a religious product. It's a fragrance house that begins with devotion and ends at home, treating what was offered with the same care it was given the first time. By giving these flowers a second life, Cense also keeps valuable organic material from becoming waste — a quiet, secondary benefit of a process built around fragrance first.",
     cover_image: null,
     published_at: "2026-01-12T00:00:00.000Z",
-    seo_title: "The Second Life of Temple Flowers | Cense Journal",
+    seo_title: "From an Offering to a Fragrance | Cense Journal",
     seo_description:
-      "How Cense recovers flowers offered at the Kamakhya Temple and transforms them into premium incense, working with rural women across Assam.",
+      "How Cense transforms flowers offered at the Kamakhya Temple into handcrafted incense, working with women artisans across Assam.",
   },
   {
     id: "post-2",

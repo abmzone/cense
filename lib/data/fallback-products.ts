@@ -10,11 +10,11 @@ export const FALLBACK_PRODUCTS: Product[] = [
     id: "00000000-0000-0000-0000-000000000001",
     slug: "where-the-flowers-rested",
     name: "Where the Flowers Rested",
-    tagline: "Soft floral. Hibiscus, rose, jasmine, and the temple flowers themselves.",
+    tagline: "Floral · Soft · Devotional",
     description:
-      "Crafted from flowers offered at the Kamakhya Temple, blended with Karbi Anglong dhuna, Assam agarwood and essential oils from Assam & Meghalaya.",
+      "The fragrance of devotion. Rose, hibiscus and jasmine offered at the Kamakhya Temple, carried into a soft floral incense blended with Karbi Anglong dhuna and Assam agarwood.",
     story:
-      "Every morning, thousands of hibiscus, marigolds, roses and jasmine are offered at the Kamakhya Temple and, by evening, cleared away as waste. Where the Flowers Rested is our attempt to let that offering continue a little longer — the same petals, dried and reground by hand, folded back into a fragrance instead of a landfill.",
+      "Every morning, hibiscus, marigolds, roses and jasmine are offered at the Kamakhya Temple as acts of devotion. Where the Flowers Rested carries a part of that offering forward — the same petals, dried and reground by hand, folded into a fragrance that lets the ritual travel beyond the temple.",
     fragrance_notes: ["Hibiscus", "Rose", "Jasmine", "Temple flowers", "Soft musk"],
     ingredients: [
       "Reclaimed temple flowers (hibiscus, rose, marigold, jasmine)",
@@ -59,9 +59,9 @@ export const FALLBACK_PRODUCTS: Product[] = [
     id: "00000000-0000-0000-0000-000000000002",
     slug: "rain-meets-the-grass",
     name: "Rain Meets the Grass",
-    tagline: "Fresh. Lemongrass, rain, and green botanicals.",
+    tagline: "Fresh · Green · Monsoon",
     description:
-      "Fresh lemongrass, rain-washed earth and green botanicals inspired by the monsoon across Northeast India.",
+      "The scent of an Assam monsoon. Fresh lemongrass, rain-washed earth and green botanicals, capturing the moment before the rains break over the valley.",
     story:
       "There is a particular smell that arrives just before the monsoon breaks over the Brahmaputra valley — wet earth, cut grass, the first rain on warm stone. Rain Meets the Grass is our attempt to hold onto that moment a little longer than the weather allows.",
     fragrance_notes: ["Lemongrass", "Rain-washed earth", "Green grass", "Monsoon petrichor"],
@@ -108,9 +108,9 @@ export const FALLBACK_PRODUCTS: Product[] = [
     id: "00000000-0000-0000-0000-000000000003",
     slug: "into-the-forest",
     name: "Into the Forest",
-    tagline: "Deep woody. Agarwood, dhuna, and forest floor.",
+    tagline: "Woody · Resinous · Deep",
     description:
-      "A deep woody blend inspired by the forests of Assam, resinous dhuna and native agarwood.",
+      "The deep fragrance of Assam's forests. Native agarwood and resinous dhuna, unhurried and quiet, drawn from the forests of the Northeast.",
     story:
       "Assam's forests carry a scent of their own — resin, damp bark, and agarwood trees that have stood for generations. Into the Forest draws on Karbi Anglong dhuna and native agarwood to bring that depth indoors, unhurried and quiet.",
     fragrance_notes: ["Agarwood", "Dhuna resin", "Forest floor", "Eucalyptus"],
@@ -157,9 +157,9 @@ export const FALLBACK_PRODUCTS: Product[] = [
     id: "00000000-0000-0000-0000-000000000004",
     slug: "the-complete-collection",
     name: "The Complete Collection",
-    tagline: "All three scents, one of each — floral, fresh, and woody.",
+    tagline: "Three fragrances · One landscape",
     description:
-      "One 40g box of each Cense fragrance — Where the Flowers Rested, Rain Meets the Grass, and Into the Forest — together in one set.",
+      "Bring the full Cense experience home. One 40g box of each fragrance — Where the Flowers Rested, Rain Meets the Grass, and Into the Forest — together in one set.",
     story:
       "Some mornings call for hibiscus and rose. Some call for rain on warm stone. Some call for the quiet of a forest. The Complete Collection is for when you are not sure which — one box of each, so the choice can wait until the moment asks for it.",
     fragrance_notes: ["Hibiscus & Rose", "Lemongrass & Rain", "Agarwood & Dhuna"],
