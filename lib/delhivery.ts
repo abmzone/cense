@@ -129,61 +129,46 @@ export async function createShipment(
   return { ok: true, waybill: pkg.waybill, raw };
 }
 
-export interface ShippingRateResult {
-  ok: boolean;
-  amountPaise: number | null;
+export interface ServiceabilityResult {
+  serviceable: boolean;
   raw: unknown;
 }
 
 /**
- * Looks up an estimated freight charge for a shipment via Delhivery's
- * Invoice/Shipping Charge API. Delhivery's own docs note the returned
- * `total_amount` is approximate and the amount actually billed can differ —
- * this is used to give customers a realistic pincode-based shipping
- * estimate at checkout, not as a billing-grade quote.
- *
- * Surface-only ("md=S") per the delivery profile for a light, non-urgent
- * product like incense.
+ * Checks whether Delhivery can deliver to a pincode (and for the given
+ * payment mode) via the Pin-code Serviceability API. Response shape per
+ * Delhivery's docs:
+ * `{ delivery_codes: [{ postal_code: { pin, pre_paid, cash, pickup } }] }` —
+ * an empty/missing `delivery_codes` array means the pincode isn't
+ * serviceable at all. Fails open to non-serviceable on any error so a
+ * flaky Delhivery response can't silently let an undeliverable order
+ * through — but never throws, so callers can decide how to surface it.
  */
-export async function getShippingRate(params: {
-  destinationPincode: string;
-  weightGrams: number;
-  paymentMode: "Prepaid" | "COD";
-}): Promise<ShippingRateResult> {
-  const originPincode = process.env.DELHIVERY_PICKUP_PINCODE ?? "";
-  const clientName = process.env.DELHIVERY_CLIENT_NAME ?? "";
-
-  const query = new URLSearchParams({
-    md: "S",
-    cgm: String(Math.max(1, Math.round(params.weightGrams))),
-    o_pin: originPincode,
-    d_pin: params.destinationPincode,
-    ss: "Delivered",
-    pt: params.paymentMode === "COD" ? "COD" : "Pre-paid",
-    cl: clientName,
-  });
-
+export async function checkPincodeServiceability(
+  pincode: string,
+  paymentMode: "Prepaid" | "COD"
+): Promise<ServiceabilityResult> {
   try {
     const res = await fetch(
-      `${BASE_URL}/api/kinko/v1/invoice/charges/.json?${query.toString()}`,
+      `${BASE_URL}/c/api/pin-codes/json/?filter_codes=${encodeURIComponent(pincode)}`,
       { headers: authHeaders() }
     );
     const raw = await res.json().catch(() => null);
 
-    if (!res.ok || !raw) return { ok: false, amountPaise: null, raw };
+    if (!res.ok || !raw) return { serviceable: false, raw };
 
-    // Response shape has been reported to vary by account — commonly an
-    // array with a `total_amount` field on the first element.
-    const entry = Array.isArray(raw) ? raw[0] : raw;
-    const amountRupees = entry?.total_amount ?? entry?.charge_DL ?? null;
-
-    if (amountRupees == null || Number.isNaN(Number(amountRupees))) {
-      return { ok: false, amountPaise: null, raw };
+    const codes = raw?.delivery_codes;
+    if (!Array.isArray(codes) || codes.length === 0) {
+      return { serviceable: false, raw };
     }
 
-    return { ok: true, amountPaise: Math.round(Number(amountRupees) * 100), raw };
+    const postal = codes[0]?.postal_code;
+    const serviceable =
+      paymentMode === "COD" ? postal?.cash === "Y" : postal?.pre_paid === "Y";
+
+    return { serviceable: Boolean(serviceable), raw };
   } catch (err) {
-    return { ok: false, amountPaise: null, raw: err instanceof Error ? err.message : err };
+    return { serviceable: false, raw: err instanceof Error ? err.message : err };
   }
 }
 

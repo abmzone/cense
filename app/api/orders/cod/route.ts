@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { computeOrderTotals } from "@/lib/pricing";
+import { checkPincodeServiceability } from "@/lib/delhivery";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { getSettings } from "@/lib/data/settings";
@@ -18,12 +19,28 @@ export async function POST(request: Request) {
 
   let totals;
   try {
-    totals = await computeOrderTotals(lines, couponCode, {
-      destinationPincode: shippingAddress?.postal_code,
-      paymentMode: "COD",
-    });
+    totals = await computeOrderTotals(lines, couponCode);
   } catch {
     return NextResponse.json({ error: "Could not verify order contents." }, { status: 400 });
+  }
+
+  if (totals.belowMinimumOrder) {
+    return NextResponse.json(
+      { error: `Minimum order value is ₹${(totals.minimumOrderValue / 100).toFixed(2)}.` },
+      { status: 400 }
+    );
+  }
+
+  if (typeof shippingAddress?.postal_code !== "string") {
+    return NextResponse.json({ error: "A valid postal code is required." }, { status: 400 });
+  }
+
+  const { serviceable } = await checkPincodeServiceability(shippingAddress.postal_code, "COD");
+  if (!serviceable) {
+    return NextResponse.json(
+      { error: "Sorry, we can't deliver (or offer COD) to this pincode yet." },
+      { status: 400 }
+    );
   }
 
   const supabaseServer = await createClient();

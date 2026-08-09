@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getRazorpayClient } from "@/lib/razorpay";
 import { computeOrderTotals } from "@/lib/pricing";
+import { checkPincodeServiceability } from "@/lib/delhivery";
 
 export async function POST(request: Request) {
   const { lines, couponCode, destinationPincode } = await request.json();
@@ -9,11 +10,27 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Your cart is empty." }, { status: 400 });
   }
 
+  if (typeof destinationPincode !== "string" || !/^\d{6}$/.test(destinationPincode)) {
+    return NextResponse.json({ error: "A valid 6-digit postal code is required." }, { status: 400 });
+  }
+
   try {
-    const totals = await computeOrderTotals(lines, couponCode, {
-      destinationPincode,
-      paymentMode: "Prepaid",
-    });
+    const { serviceable } = await checkPincodeServiceability(destinationPincode, "Prepaid");
+    if (!serviceable) {
+      return NextResponse.json(
+        { error: "Sorry, we can't deliver to this pincode yet." },
+        { status: 400 }
+      );
+    }
+
+    const totals = await computeOrderTotals(lines, couponCode);
+
+    if (totals.belowMinimumOrder) {
+      return NextResponse.json(
+        { error: `Minimum order value is ₹${(totals.minimumOrderValue / 100).toFixed(2)}.` },
+        { status: 400 }
+      );
+    }
 
     if (totals.total <= 0) {
       return NextResponse.json({ error: "Order total must be greater than zero." }, { status: 400 });

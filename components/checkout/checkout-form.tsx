@@ -33,7 +33,10 @@ export function CheckoutForm({ codEnabled }: Props) {
   const [shippingFee, setShippingFee] = useState<number | null>(null);
   const [taxAmount, setTaxAmount] = useState<number | null>(null);
   const [discount, setDiscount] = useState(0);
-  const [ratingShipping, setRatingShipping] = useState(false);
+  const [serviceable, setServiceable] = useState<boolean | null>(null);
+  const [belowMinimumOrder, setBelowMinimumOrder] = useState(false);
+  const [minimumOrderValue, setMinimumOrderValue] = useState(0);
+  const [checkingPincode, setCheckingPincode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -45,12 +48,12 @@ export function CheckoutForm({ codEnabled }: Props) {
     [lines]
   );
 
-  // Debounced live estimate: pincode-based shipping rate only kicks in once
-  // a full 6-digit postal code is entered, otherwise this still resolves
-  // discount/tax/flat-rate shipping so the summary isn't blank.
+  // Debounced live estimate: pincode serviceability is only checked once a
+  // full 6-digit postal code is entered, otherwise this still resolves
+  // discount/shipping/minimum-order state so the summary isn't blank.
   useEffect(() => {
     if (lines.length === 0) return;
-    setRatingShipping(isCompletePincode);
+    setCheckingPincode(isCompletePincode);
     const timeout = setTimeout(() => {
       fetch("/api/shipping/calculate", {
         method: "POST",
@@ -68,12 +71,15 @@ export function CheckoutForm({ codEnabled }: Props) {
           setShippingFee(data.fee);
           setTaxAmount(data.tax);
           setDiscount(data.discount);
+          setBelowMinimumOrder(data.belowMinimumOrder);
+          setMinimumOrderValue(data.minimumOrderValue);
+          setServiceable(data.serviceable);
         })
         .catch(() => {
           setShippingFee(null);
           setTaxAmount(null);
         })
-        .finally(() => setRatingShipping(false));
+        .finally(() => setCheckingPincode(false));
     }, 400);
 
     return () => clearTimeout(timeout);
@@ -92,9 +98,12 @@ export function CheckoutForm({ codEnabled }: Props) {
       form.line1.trim() &&
       form.city.trim() &&
       form.state.trim() &&
-      form.postalCode.trim()
+      isCompletePincode
     );
   }
+
+  const canSubmit =
+    isFormValid() && !belowMinimumOrder && serviceable !== false && !checkingPincode;
 
   const shippingAddress = {
     full_name: form.fullName,
@@ -182,7 +191,7 @@ export function CheckoutForm({ codEnabled }: Props) {
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!isFormValid() || lines.length === 0) return;
+    if (!canSubmit || lines.length === 0) return;
     setLoading(true);
     setError(null);
     try {
@@ -271,13 +280,20 @@ export function CheckoutForm({ codEnabled }: Props) {
               onChange={(e) => setForm((f) => ({ ...f, state: e.target.value }))}
               className="border border-ink/20 bg-transparent px-3 py-3 text-sm focus:border-maroon focus:outline-none"
             />
-            <input
-              required
-              placeholder="Postal code"
-              value={form.postalCode}
-              onChange={(e) => setForm((f) => ({ ...f, postalCode: e.target.value }))}
-              className="border border-ink/20 bg-transparent px-3 py-3 text-sm focus:border-maroon focus:outline-none"
-            />
+            <div>
+              <input
+                required
+                placeholder="Postal code"
+                value={form.postalCode}
+                onChange={(e) => setForm((f) => ({ ...f, postalCode: e.target.value }))}
+                className="w-full border border-ink/20 bg-transparent px-3 py-3 text-sm focus:border-maroon focus:outline-none"
+              />
+              {isCompletePincode && !checkingPincode && serviceable === false && (
+                <p className="mt-1 text-xs text-maroon">
+                  Sorry, we can&apos;t deliver to this pincode yet.
+                </p>
+              )}
+            </div>
             <input
               disabled
               value={form.country}
@@ -344,31 +360,21 @@ export function CheckoutForm({ codEnabled }: Props) {
           <div className="flex justify-between text-ink-soft">
             <span>Shipping</span>
             <span className="text-ink">
-              {ratingShipping
-                ? "Calculating..."
-                : shippingFee === null
-                  ? "—"
-                  : shippingFee === 0
-                    ? "Free"
-                    : formatINR(shippingFee)}
+              {shippingFee === null ? "—" : shippingFee === 0 ? "Free" : formatINR(shippingFee)}
             </span>
           </div>
           <div className="flex justify-between border-t border-line pt-3 font-serif text-lg text-ink">
             <span>Total</span>
             <span>{estimatedTotal === null ? "—" : formatINR(estimatedTotal)}</span>
           </div>
-          {!isCompletePincode && (
-            <p className="text-xs text-ink-soft">
-              Enter your full 6-digit postal code above for an accurate shipping rate.
+          {belowMinimumOrder && (
+            <p className="text-xs text-maroon">
+              Minimum order value is {formatINR(minimumOrderValue)}.
             </p>
           )}
         </div>
 
-        <Button
-          type="submit"
-          disabled={loading || lines.length === 0 || !isFormValid()}
-          className="mt-6 w-full"
-        >
+        <Button type="submit" disabled={loading || !canSubmit} className="mt-6 w-full">
           {loading ? "Processing..." : "Pay Now"}
         </Button>
       </div>
