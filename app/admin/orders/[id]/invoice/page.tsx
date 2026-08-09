@@ -87,10 +87,12 @@ export default async function InvoicePage({ params }: PageProps<"/admin/orders/[
           <span>Shipping</span>
           <span>{formatINR(order.shipping_fee)}</span>
         </div>
-        <div className="flex justify-between text-ink-soft">
-          <span>Tax</span>
-          <span>{formatINR(order.tax)}</span>
-        </div>
+        {order.tax > 0 && (
+          <div className="flex justify-between text-ink-soft">
+            <span>Tax</span>
+            <span>{formatINR(order.tax)}</span>
+          </div>
+        )}
         <div className="flex justify-between border-t border-ink/20 pt-2 font-serif text-lg text-ink">
           <span>Total</span>
           <span>{formatINR(order.total)}</span>

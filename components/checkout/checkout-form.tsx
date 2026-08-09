@@ -353,10 +353,6 @@ export function CheckoutForm({ codEnabled }: Props) {
                     : formatINR(shippingFee)}
             </span>
           </div>
-          <div className="flex justify-between text-ink-soft">
-            <span>Tax</span>
-            <span className="text-ink">{taxAmount === null ? "—" : formatINR(taxAmount)}</span>
-          </div>
           <div className="flex justify-between border-t border-line pt-3 font-serif text-lg text-ink">
             <span>Total</span>
             <span>{estimatedTotal === null ? "—" : formatINR(estimatedTotal)}</span>

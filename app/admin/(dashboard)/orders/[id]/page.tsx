@@ -65,10 +65,12 @@ export default async function AdminOrderDetailPage({
               <span>Shipping</span>
               <span>{formatINR(order.shipping_fee)}</span>
             </div>
-            <div className="flex justify-between">
-              <span>Tax</span>
-              <span>{formatINR(order.tax)}</span>
-            </div>
+            {order.tax > 0 && (
+              <div className="flex justify-between">
+                <span>Tax</span>
+                <span>{formatINR(order.tax)}</span>
+              </div>
+            )}
             <div className="flex justify-between border-t border-line pt-2 font-serif text-base text-ink">
               <span>Total</span>
               <span>{formatINR(order.total)}</span>

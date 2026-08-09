@@ -1,8 +1,12 @@
 -- Seed data for Cense. Run after 0001_init.sql.
 -- Product IDs are fixed so this file can be re-run safely with `on conflict`.
 
+-- tax_rate_percent is 0 by default: an unregistered seller (no GST) should
+-- not display a separate tax line at all. Only set this above 0 once
+-- GST-registered, and re-add the "Tax" line in the checkout/invoice/order
+-- UI (removed for the same reason).
 insert into settings (id, free_shipping_threshold, standard_shipping_fee, tax_rate_percent, cod_enabled)
-values (1, 99900, 6900, 5, false)
+values (1, 99900, 6900, 0, false)
 on conflict (id) do nothing;
 
 -- Where the Flowers Rested ---------------------------------------------------

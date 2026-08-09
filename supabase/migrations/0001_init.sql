@@ -239,7 +239,7 @@ create table settings (
   id int primary key default 1,
   free_shipping_threshold int not null default 99900,
   standard_shipping_fee int not null default 6900,
-  tax_rate_percent numeric not null default 5,
+  tax_rate_percent numeric not null default 0,
   cod_enabled boolean not null default false,
   constraint settings_singleton check (id = 1)
 );
