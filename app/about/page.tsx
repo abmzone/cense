@@ -12,29 +12,25 @@ export const metadata: Metadata = {
 
 const PROCESS_STEPS = [
   {
-    title: "Devotion",
+    title: "Collected",
+    image: null,
+    tone: "floral" as const,
     description:
-      "Flowers are offered at the Kamakhya Temple each day as acts of devotion, then carefully collected.",
+      "Flowers offered at the Kamakhya Temple are carefully collected after their ritual journey, then dried by hand and blended with dhuna resin, agarwood and essential oils from Assam and Meghalaya.",
   },
   {
-    title: "Drying",
+    title: "Handcrafted",
+    image: "/process/shg-morigaon-handcraft.jpg",
+    tone: "woody" as const,
     description:
-      "Petals are hand-sorted and sun-dried over several days, then ground into a fine base powder.",
+      "A Self Help Group of women artisans in Morigaon, Assam hand-rolls and finishes every stick, in small batches.",
   },
   {
-    title: "Blending",
+    title: "Packed",
+    image: "/process/packed-warehouse-guwahati.jpg",
+    tone: "neutral" as const,
     description:
-      "The flower base is blended with dhuna resin, agarwood and essential oils from Assam and Meghalaya.",
-  },
-  {
-    title: "Rolling",
-    description:
-      "Each stick is hand-rolled onto a bamboo core by women artisans in Assam, in small batches.",
-  },
-  {
-    title: "Curing & Packing",
-    description:
-      "Sticks are air-cured to stabilise the fragrance, then packed with plastic-conscious materials.",
+      "Finished sticks are air-cured and packed at our warehouse in Guwahati, ready to bring the spirit of Kamakhya home.",
   },
 ];
 
@@ -73,13 +69,22 @@ export default function AboutPage() {
           <Reveal>
             <h2 className="font-serif text-3xl text-ink md:text-4xl">Our Process</h2>
           </Reveal>
-          <ol className="mt-14 grid gap-10 md:grid-cols-5">
+          <ol className="mt-14 grid gap-12 md:grid-cols-3">
             {PROCESS_STEPS.map((step, i) => (
-              <Reveal key={step.title} delay={i * 0.05} as="li">
-                <span className="font-serif text-3xl text-terracotta">
+              <Reveal key={step.title} delay={i * 0.06} as="li">
+                <div className="aspect-[4/5] w-full">
+                  <PlaceholderImage
+                    src={step.image}
+                    alt={step.title}
+                    tone={step.tone}
+                    label={step.image ? undefined : step.title}
+                    className="h-full w-full"
+                  />
+                </div>
+                <span className="mt-5 block font-serif text-2xl text-terracotta">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-4 font-serif text-lg text-ink">{step.title}</h3>
+                <h3 className="mt-2 font-serif text-lg text-ink">{step.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-soft">{step.description}</p>
               </Reveal>
             ))}
