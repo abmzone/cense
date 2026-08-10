@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const PROCESS_STEPS = [
   {
     title: "Collected",
-    image: null,
+    image: "/process/collected-kamakhya-flowers.jpg",
     tone: "floral" as const,
     description:
       "Flowers offered at the Kamakhya Temple are carefully collected after their ritual journey, then dried by hand and blended with dhuna resin, agarwood and essential oils from Assam and Meghalaya.",
