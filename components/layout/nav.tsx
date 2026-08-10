@@ -31,11 +31,8 @@ export function Nav() {
       )}
     >
       <div className="container-editorial flex h-20 items-center justify-between">
-        <Link
-          href="/"
-          className="font-serif text-2xl tracking-[0.15em] text-ink"
-        >
-          {SITE.name.toUpperCase()}
+        <Link href="/" aria-label={SITE.name} className="block">
+          <img src="/cense-logo.svg" alt={SITE.name} className="h-6 w-auto md:h-7" />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

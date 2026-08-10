@@ -9,9 +9,7 @@ export function Footer() {
     <footer className="border-t border-line bg-off-white">
       <Container className="grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div>
-          <p className="font-serif text-2xl tracking-[0.15em] text-ink">
-            {SITE.name.toUpperCase()}
-          </p>
+          <img src="/cense-logo.svg" alt={SITE.name} className="h-6 w-auto" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-soft">
             {SITE.description}
           </p>
