@@ -50,18 +50,18 @@ export default async function HomePage() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
         <Container className="relative z-10 pb-20 pt-40 text-warm-white">
-          <Reveal>
+          <Reveal margin="0px">
             <p className="text-xs uppercase tracking-[0.3em] text-warm-white/80">
               From Kamakhya, Assam
             </p>
-            <h1 className="mt-6 max-w-2xl font-serif text-5xl leading-[1.1] md:text-7xl">
+            <h1 className="mt-5 max-w-3xl font-serif text-[clamp(1.875rem,1.1rem+3.2vw,3.25rem)] leading-[1.2] tracking-tight">
               {heroBanner.heading}
             </h1>
             {heroBanner.subheading && (
               <p className="mt-4 max-w-lg text-sm text-warm-white/80">{heroBanner.subheading}</p>
             )}
           </Reveal>
-          <Reveal delay={0.1}>
+          <Reveal delay={0.1} margin="0px">
             <div className="mt-10 flex flex-wrap gap-4">
               <ButtonLink
                 href={heroBanner.cta_href || "/shop"}

@@ -4,8 +4,8 @@ import type { Banner } from "@/lib/types";
 const FALLBACK_HOME_HERO: Banner = {
   id: "fallback-home-hero",
   key: "home-hero",
-  heading: "Handcrafted Incense",
-  subheading: "Made from flowers offered at the Kamakhya Temple.",
+  heading: "Handcrafted incense made from Kamakhya Temple flowers.",
+  subheading: "",
   cta_label: "Shop the Collection",
   cta_href: "/shop",
   is_active: true,

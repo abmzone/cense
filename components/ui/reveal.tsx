@@ -9,16 +9,24 @@ interface RevealProps {
   y?: number;
   className?: string;
   as?: "div" | "li";
+  margin?: string;
 }
 
 /** Subtle fade + slide-up on scroll into view. Used sparingly per brand spec. */
-export function Reveal({ children, delay = 0, y = 16, className, as = "div" }: RevealProps) {
+export function Reveal({
+  children,
+  delay = 0,
+  y = 16,
+  className,
+  as = "div",
+  margin = "-80px",
+}: RevealProps) {
   const Component = motion[as];
   return (
     <Component
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin }}
       transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >

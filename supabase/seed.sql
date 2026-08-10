@@ -152,7 +152,7 @@ on conflict do nothing;
 
 -- Homepage banner ---------------------------------------------------------
 insert into banners (key, heading, subheading, cta_label, cta_href, is_active)
-values ('home-hero', 'Handcrafted Incense', 'Made from flowers offered at the Kamakhya Temple.', 'Shop the Collection', '/shop', true)
+values ('home-hero', 'Handcrafted incense made from Kamakhya Temple flowers.', '', 'Shop the Collection', '/shop', true)
 on conflict (key) do nothing;
 
 -- Product photography -----------------------------------------------------
