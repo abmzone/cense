@@ -52,7 +52,7 @@ export default async function HomePage() {
         <Container className="relative z-10 pb-20 pt-40 text-warm-white">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.3em] text-warm-white/80">
-              Handcrafted in Assam
+              From Kamakhya, Assam
             </p>
             <h1 className="mt-6 max-w-2xl font-serif text-5xl leading-[1.1] md:text-7xl">
               {heroBanner.heading}
