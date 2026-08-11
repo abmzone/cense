@@ -3,11 +3,12 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { PlaceholderImage } from "@/components/media/placeholder-image";
 import { ButtonLink } from "@/components/ui/button";
+import { PROCESS_STEPS } from "@/lib/process-steps";
 
 export const metadata: Metadata = {
   title: "Our Story",
   description:
-    "How flowers offered at the Kamakhya Temple become Cense — handcrafted incense rooted in devotion and the landscapes of Assam.",
+    "How Cense brings the spirit of Kamakhya home — the devotion, the flowers, the fragrance, the process, and the women artisans of Assam behind every stick.",
 };
 
 export default function StoryPage() {
@@ -35,9 +36,11 @@ export default function StoryPage() {
         <Container className="max-w-3xl">
           <Reveal>
             <p className="font-serif text-2xl leading-relaxed text-ink md:text-3xl">
-              Every day, flowers are offered at the Kamakhya Temple as acts of devotion. After
-              their ritual journey, these flowers are carefully collected and transformed into
-              incense — allowing a part of their story to travel beyond the temple.
+              Cense began with a simple idea: what if the spirit of a place could be experienced
+              through fragrance? Every day, flowers are offered at the Kamakhya Temple as acts of
+              devotion. After their ritual journey, these flowers are carefully collected and
+              transformed into incense — allowing a part of their story to travel beyond the
+              temple.
             </p>
           </Reveal>
 
@@ -84,6 +87,74 @@ export default function StoryPage() {
               along in its life, carrying its story into a home instead of ending at the temple.
               No verses, no rituals attached to the product itself. Just a fragrance shaped by
               where it came from.
+            </p>
+          </Reveal>
+        </Container>
+      </section>
+
+      <section className="py-28">
+        <Container>
+          <Reveal>
+            <h2 className="font-serif text-3xl text-ink md:text-4xl">Our Process</h2>
+          </Reveal>
+          <ol className="mt-14 grid gap-12 md:grid-cols-3">
+            {PROCESS_STEPS.map((step, i) => (
+              <Reveal key={step.title} delay={i * 0.06} as="li">
+                <div className="aspect-[4/5] w-full">
+                  <PlaceholderImage
+                    src={step.image}
+                    alt={step.title}
+                    tone={step.tone}
+                    label={step.image ? undefined : step.title}
+                    className="h-full w-full"
+                  />
+                </div>
+                <span className="mt-5 block font-serif text-2xl text-terracotta">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-2 font-serif text-lg text-ink">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{step.description}</p>
+              </Reveal>
+            ))}
+          </ol>
+        </Container>
+      </section>
+
+      <section className="bg-maroon py-28 text-warm-white">
+        <Container className="grid items-center gap-14 md:grid-cols-2">
+          <Reveal>
+            <div className="aspect-[4/3]">
+              <PlaceholderImage
+                alt="Women artisans hand-rolling incense sticks in a workshop in Assam"
+                tone="woody"
+                className="h-full w-full"
+              />
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="text-xs uppercase tracking-[0.3em] text-warm-white/70">
+              Made By Hand
+            </p>
+            <h2 className="mt-6 font-serif text-3xl md:text-4xl">
+              Made by hand. Made to matter.
+            </h2>
+            <p className="mt-6 text-sm leading-relaxed text-warm-white/80">
+              Each Cense stick is hand-finished by women artisans in Assam. By working with
+              Self Help Groups, we support skilled hands, create meaningful local livelihoods
+              and keep traditional making at the heart of every box.
+            </p>
+          </Reveal>
+        </Container>
+      </section>
+
+      <section className="bg-off-white py-24">
+        <Container className="max-w-2xl">
+          <Reveal>
+            <h2 className="font-serif text-3xl text-ink md:text-4xl">Natural, by Design</h2>
+            <p className="mt-6 text-base leading-relaxed text-ink-soft">
+              Every stick is charcoal-free, built on a natural joss powder binder, with no
+              synthetic fragrance oils or phthalates. Packaging favours paper and glass over
+              plastic wherever possible.
             </p>
           </Reveal>
         </Container>

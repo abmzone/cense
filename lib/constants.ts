@@ -14,14 +14,13 @@ export const MAIN_NAV = [
   { label: "Shop", href: "/shop" },
   { label: "Our Story", href: "/story" },
   { label: "Ingredients", href: "/ingredients" },
-  { label: "About", href: "/about" },
   { label: "Journal", href: "/journal" },
   { label: "Contact", href: "/contact" },
 ];
 
 export const FOOTER_NAV = {
   brand: [
-    { label: "About", href: "/about" },
+    { label: "About", href: "/story" },
     { label: "Shop", href: "/shop" },
     { label: "Journal", href: "/journal" },
     { label: "Contact", href: "/contact" },
