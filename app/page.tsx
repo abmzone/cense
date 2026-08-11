@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { ButtonLink } from "@/components/ui/button";
 import { PlaceholderImage } from "@/components/media/placeholder-image";
+import { HeroVideo } from "@/components/media/hero-video";
 import { ProductCard } from "@/components/shop/product-card";
 import { WhyCenseCard } from "@/components/home/why-cense-card";
 import { getProducts } from "@/lib/data/products";
@@ -40,13 +41,10 @@ export default async function HomePage() {
     <>
       {/* Hero */}
       <section className="relative flex min-h-[92vh] items-end overflow-hidden">
-        <PlaceholderImage
-          src="/hero-temple-sunset.jpg"
-          alt="A single incense stick burning beside temple flowers and a lit brass diya, with the Kamakhya Temple at sunset in the background"
-          tone="woody"
+        <HeroVideo
+          src="/video/hero-loop.mp4"
+          poster="/hero-temple-sunset.jpg"
           className="absolute inset-0 h-full w-full"
-          sizes="100vw"
-          priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
         <Container className="relative z-10 pb-20 pt-40 text-warm-white">
