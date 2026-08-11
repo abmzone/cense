@@ -13,6 +13,7 @@ const INGREDIENTS: Ingredient[] = [
   {
     title: "Temple Flowers",
     region: "Kamakhya",
+    image: "/ingredients/kamakhya-temple-flowers.jpg",
     tone: "floral",
     description:
       "Rose, marigold and jasmine offered at the Kamakhya Temple, carefully collected after their ritual journey. Dried by hand over several days, then ground into the base of every Cense stick.",
@@ -20,6 +21,7 @@ const INGREDIENTS: Ingredient[] = [
   {
     title: "Dhuna",
     region: "Karbi Anglong",
+    image: "/ingredients/karbi-anglong-dhuna.jpg",
     tone: "woody",
     description:
       "Known as Dhuna in Assamese and Hijung in Karbi, this frankincense is the sap of Canarium resiniferum — a large tree native to Assam and Bangladesh that thrives in moist tropical forest. Harvesters make incisions in the trunk, releasing a clear, reddish sap that hardens into a brownish gum. Traditionally burned on its own for its warm, smoky character, we fold it into our blends for depth.",
@@ -27,6 +29,7 @@ const INGREDIENTS: Ingredient[] = [
   {
     title: "Agarwood",
     region: "Assam",
+    image: "/ingredients/assam-agarwood.jpg",
     tone: "woody",
     description:
       "Native agarwood, aged and ground to a fine powder. It carries a fragrance that is deep without being heavy — the backbone of our woodier blends.",
@@ -34,22 +37,10 @@ const INGREDIENTS: Ingredient[] = [
   {
     title: "Essential Oils",
     region: "Assam & Meghalaya",
+    image: "/ingredients/essential-oils-patchouli.jpg",
     tone: "fresh",
     description:
       "Lemongrass, citronella, vetiver and patchouli, sourced from farms across Assam and Meghalaya — no synthetic fragrance oils are used in any Cense product.",
-  },
-  {
-    title: "Joss Powder",
-    region: "Natural Materials",
-    tone: "neutral",
-    description:
-      "A natural, plant-based binder that holds the incense paste around its bamboo core — our charcoal-free alternative to conventional incense bases.",
-  },
-  {
-    title: "Traditional Craft",
-    tone: "neutral",
-    description:
-      "Every stick is hand-rolled by women artisans across Assam, using techniques passed down rather than mechanised production lines.",
   },
 ];
 

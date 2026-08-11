@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 export interface Ingredient {
   title: string;
   region?: string;
+  image?: string;
   tone: "floral" | "fresh" | "woody" | "neutral";
   description: string;
 }
@@ -19,9 +20,10 @@ export function IngredientAccordion({ ingredients }: { ingredients: Ingredient[]
     <div className="grid gap-12 md:grid-cols-2">
       <div className="aspect-square md:sticky md:top-28 md:self-start">
         <PlaceholderImage
+          src={ingredients[openIndex].image}
           alt={ingredients[openIndex].title}
           tone={ingredients[openIndex].tone}
-          label={ingredients[openIndex].title}
+          label={ingredients[openIndex].image ? undefined : ingredients[openIndex].title}
           className="h-full w-full"
         />
       </div>
