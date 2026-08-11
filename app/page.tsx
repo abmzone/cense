@@ -10,6 +10,7 @@ import { WhyCenseCard } from "@/components/home/why-cense-card";
 import { getProducts } from "@/lib/data/products";
 import { getJournalPosts } from "@/lib/data/journal";
 import { getBanner } from "@/lib/data/banners";
+import { PROCESS_STEPS } from "@/lib/process-steps";
 
 export const dynamic = "force-dynamic";
 
@@ -49,10 +50,7 @@ export default async function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
         <Container className="relative z-10 pb-20 pt-40 text-warm-white">
           <Reveal margin="0px">
-            <p className="text-xs uppercase tracking-[0.3em] text-warm-white/80">
-              From Kamakhya, Assam
-            </p>
-            <h1 className="mt-5 max-w-3xl font-serif text-[clamp(1.875rem,1.1rem+3.2vw,3.25rem)] leading-[1.2] tracking-tight">
+            <h1 className="max-w-3xl font-serif text-[clamp(1.875rem,1.1rem+3.2vw,3.25rem)] leading-[1.2] tracking-tight">
               {heroBanner.heading}
             </h1>
             {heroBanner.subheading && (
@@ -76,27 +74,6 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      {/* Hero story */}
-      <section className="py-28">
-        <Container className="grid gap-12 md:grid-cols-2 md:gap-24">
-          <Reveal>
-            <p className="text-xs uppercase tracking-[0.3em] text-terracotta">Our Story</p>
-            <h2 className="mt-6 font-serif text-4xl leading-tight text-ink md:text-5xl">
-              A fragrance born in Assam. A ritual brought home.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="text-base leading-relaxed text-ink-soft">
-              Cense brings together the devotion of Kamakhya, the landscapes of Assam and the
-              craft of its people — shaped into incense for everyday rituals at home.
-            </p>
-            <ButtonLink href="/story" variant="ghost" className="mt-6 px-0">
-              Read the full story
-            </ButtonLink>
-          </Reveal>
-        </Container>
-      </section>
-
       {/* Featured products */}
       <section className="py-28">
         <Container>
@@ -115,6 +92,49 @@ export default async function HomePage() {
               </Reveal>
             ))}
           </div>
+        </Container>
+      </section>
+
+      {/* Our Story */}
+      <section className="py-28">
+        <Container>
+          <div className="grid gap-12 md:grid-cols-2 md:gap-24">
+            <Reveal>
+              <p className="text-xs uppercase tracking-[0.3em] text-terracotta">Our Story</p>
+              <h2 className="mt-6 font-serif text-4xl leading-tight text-ink md:text-5xl">
+                A fragrance born in Assam. A ritual brought home.
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="text-base leading-relaxed text-ink-soft">
+                Cense brings together the devotion of Kamakhya, the landscapes of Assam and the
+                craft of its people — shaped into incense for everyday rituals at home.
+              </p>
+              <ButtonLink href="/story" variant="ghost" className="mt-6 px-0">
+                Read the full story
+              </ButtonLink>
+            </Reveal>
+          </div>
+
+          <ol className="mt-16 grid gap-10 md:grid-cols-3">
+            {PROCESS_STEPS.map((step, i) => (
+              <Reveal key={step.title} delay={i * 0.06} as="li">
+                <div className="aspect-[4/5] w-full">
+                  <PlaceholderImage
+                    src={step.image}
+                    alt={step.title}
+                    tone={step.tone}
+                    className="h-full w-full"
+                  />
+                </div>
+                <span className="mt-4 block font-serif text-xl text-terracotta">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-1 font-serif text-lg text-ink">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{step.description}</p>
+              </Reveal>
+            ))}
+          </ol>
         </Container>
       </section>
 
