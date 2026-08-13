@@ -7,7 +7,7 @@ export const SITE = {
   metaDescription:
     "Cense is handcrafted incense from Assam, made with Kamakhya Temple flowers and natural ingredients.",
   email: "hello@cense.in",
-  phone: "+91 90000 00000",
+  phone: "+91 70860 83353",
   instagram: "https://instagram.com/cense.in",
   address: "Guwahati, Assam, India",
 };
