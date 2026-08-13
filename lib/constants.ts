@@ -4,7 +4,8 @@ export const SITE = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://cense.in",
   description:
     "Cense is handcrafted incense from Assam, made with flowers offered at the Kamakhya Temple, natural ingredients and fragrances inspired by the Northeast.",
-  metaDescription: "Kamakhya temple flower incense",
+  metaDescription:
+    "Cense is handcrafted incense from Assam, made with Kamakhya Temple flowers and natural ingredients.",
   email: "hello@cense.in",
   phone: "+91 90000 00000",
   instagram: "https://instagram.com/cense.in",

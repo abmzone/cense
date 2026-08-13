@@ -23,20 +23,20 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — Handcrafted Incense Rooted in Kamakhya`,
+    default: "cense.in - Handcrafted Kamakhya Temple Flower Incense",
     template: `%s | ${SITE.name}`,
   },
   description: SITE.metaDescription,
   openGraph: {
     type: "website",
     siteName: SITE.name,
-    title: `${SITE.name} — Handcrafted Incense Rooted in Kamakhya`,
+    title: "cense.in - Handcrafted Kamakhya Temple Flower Incense",
     description: SITE.metaDescription,
     url: SITE.url,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — Handcrafted Incense Rooted in Kamakhya`,
+    title: "cense.in - Handcrafted Kamakhya Temple Flower Incense",
     description: SITE.metaDescription,
   },
   alternates: {
