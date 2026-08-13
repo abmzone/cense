@@ -6,7 +6,7 @@
 -- GST-registered, and re-add the "Tax" line in the checkout/invoice/order
 -- UI (removed for the same reason).
 insert into settings (id, free_shipping_threshold, standard_shipping_fee, minimum_shipping_fee, tax_rate_percent, cod_enabled)
-values (1, 49900, 6900, 15000, 0, false)
+values (1, 49900, 6900, 15000, 0, true)
 on conflict (id) do nothing;
 
 -- Where the Flowers Rested ---------------------------------------------------

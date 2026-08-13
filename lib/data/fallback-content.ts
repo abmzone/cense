@@ -87,5 +87,5 @@ export const FALLBACK_SETTINGS: Settings = {
   standard_shipping_fee: 8000,
   minimum_order_value: 15000,
   tax_rate_percent: 0,
-  cod_enabled: false,
+  cod_enabled: true,
 };
