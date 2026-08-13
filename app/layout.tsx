@@ -26,18 +26,18 @@ export const metadata: Metadata = {
     default: `${SITE.name} — Handcrafted Incense Rooted in Kamakhya`,
     template: `%s | ${SITE.name}`,
   },
-  description: SITE.description,
+  description: SITE.metaDescription,
   openGraph: {
     type: "website",
     siteName: SITE.name,
     title: `${SITE.name} — Handcrafted Incense Rooted in Kamakhya`,
-    description: SITE.description,
+    description: SITE.metaDescription,
     url: SITE.url,
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE.name} — Handcrafted Incense Rooted in Kamakhya`,
-    description: SITE.description,
+    description: SITE.metaDescription,
   },
   alternates: {
     canonical: SITE.url,
