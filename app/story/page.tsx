@@ -16,7 +16,8 @@ export default function StoryPage() {
     <>
       <section className="relative flex min-h-[60vh] items-end overflow-hidden">
         <PlaceholderImage
-          alt="Dried temple flowers being sorted by hand"
+          src="/story/early-experiments.jpg"
+          alt="An early Cense experiment — hand-rolled incense sticks standing in a wooden holder on a home dining table"
           tone="floral"
           className="absolute inset-0 h-full w-full"
           priority
@@ -46,6 +47,14 @@ export default function StoryPage() {
 
           <Reveal delay={0.1}>
             <div className="mt-14 space-y-6 text-base leading-relaxed text-ink-soft">
+              <p>
+                It started small — spare flowers collected from Kamakhya, and a lot of
+                evenings spent experimenting at a home dining table. Long before there was a
+                collective or a proper process, there was trial and error: drying petals,
+                grinding them by hand, rolling sticks that did not always hold together, and
+                lighting one after another to see what actually worked. Cense grew out of that
+                experimenting, not the other way around.
+              </p>
               <p>
                 Working with a small collective of women artisans across Assam, we gather a
                 portion of the hibiscus, marigold, rose and jasmine offered each day at
