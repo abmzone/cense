@@ -11,7 +11,7 @@ export function Footer() {
         src="/footer/temple-overlay.png"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 right-0 hidden w-64 select-none opacity-80 md:block lg:w-80"
+        className="pointer-events-none absolute bottom-0 right-0 hidden w-80 select-none opacity-80 md:block lg:w-[26rem]"
       />
       <Container className="relative grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div>
