@@ -30,6 +30,7 @@ interface OrderConfirmationData {
     discount: number;
     shipping_fee: number;
     tax: number;
+    cod_fee?: number;
     total: number;
     coupon_code: string | null;
     shipping_address: OrderConfirmationAddress;
@@ -130,6 +131,7 @@ export function buildOrderConfirmationHtml({ order, items }: OrderConfirmationDa
                   ${summaryRow("Subtotal", formatINR(order.subtotal))}
                   ${order.discount > 0 ? summaryRow(`Discount${order.coupon_code ? ` (${order.coupon_code})` : ""}`, `-${formatINR(order.discount)}`) : ""}
                   ${summaryRow("Shipping", order.shipping_fee > 0 ? formatINR(order.shipping_fee) : "Free")}
+                  ${order.cod_fee && order.cod_fee > 0 ? summaryRow("Cash on Delivery Fee", formatINR(order.cod_fee)) : ""}
                   ${order.tax > 0 ? summaryRow("Tax", formatINR(order.tax)) : ""}
                   <tr><td colspan="2" style="padding-top:8px;border-top:1px solid ${COLORS.line};"></td></tr>
                   ${summaryRow(isCod ? "Total (pay on delivery)" : "Total Paid", formatINR(order.total), true)}

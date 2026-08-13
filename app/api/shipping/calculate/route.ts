@@ -12,7 +12,7 @@ export async function POST(request: Request) {
 
   try {
     const [totals, settings] = await Promise.all([
-      computeOrderTotals(lines, couponCode),
+      computeOrderTotals(lines, couponCode, paymentMode === "COD" ? "cod" : "razorpay"),
       getSettings(),
     ]);
 
@@ -28,6 +28,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       fee: totals.shippingFee,
       tax: totals.tax,
+      codFee: totals.codFee,
       discount: totals.discount,
       total: totals.total,
       freeShippingThreshold: settings.free_shipping_threshold,

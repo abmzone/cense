@@ -32,6 +32,7 @@ export function CheckoutForm({ codEnabled }: Props) {
   const [paymentMethod, setPaymentMethod] = useState<"razorpay" | "cod">("razorpay");
   const [shippingFee, setShippingFee] = useState<number | null>(null);
   const [taxAmount, setTaxAmount] = useState<number | null>(null);
+  const [codFee, setCodFee] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [serviceable, setServiceable] = useState<boolean | null>(null);
   const [belowMinimumOrder, setBelowMinimumOrder] = useState(false);
@@ -70,6 +71,7 @@ export function CheckoutForm({ codEnabled }: Props) {
           if (data.error) throw new Error(data.error);
           setShippingFee(data.fee);
           setTaxAmount(data.tax);
+          setCodFee(data.codFee ?? 0);
           setDiscount(data.discount);
           setBelowMinimumOrder(data.belowMinimumOrder);
           setMinimumOrderValue(data.minimumOrderValue);
@@ -78,6 +80,7 @@ export function CheckoutForm({ codEnabled }: Props) {
         .catch(() => {
           setShippingFee(null);
           setTaxAmount(null);
+          setCodFee(0);
         })
         .finally(() => setCheckingPincode(false));
     }, 400);
@@ -87,8 +90,8 @@ export function CheckoutForm({ codEnabled }: Props) {
 
   const estimatedTotal = useMemo(() => {
     if (shippingFee === null || taxAmount === null) return null;
-    return subtotal - discount + shippingFee + taxAmount;
-  }, [subtotal, discount, shippingFee, taxAmount]);
+    return subtotal - discount + shippingFee + taxAmount + codFee;
+  }, [subtotal, discount, shippingFee, taxAmount, codFee]);
 
   function isFormValid() {
     return (
@@ -363,6 +366,12 @@ export function CheckoutForm({ codEnabled }: Props) {
               {shippingFee === null ? "—" : shippingFee === 0 ? "Free" : formatINR(shippingFee)}
             </span>
           </div>
+          {paymentMethod === "cod" && codFee > 0 && (
+            <div className="flex justify-between text-ink-soft">
+              <span>Cash on Delivery Fee</span>
+              <span className="text-ink">{formatINR(codFee)}</span>
+            </div>
+          )}
           <div className="flex justify-between border-t border-line pt-3 font-serif text-lg text-ink">
             <span>Total</span>
             <span>{estimatedTotal === null ? "—" : formatINR(estimatedTotal)}</span>

@@ -20,7 +20,7 @@ export async function POST(request: Request) {
 
   let totals;
   try {
-    totals = await computeOrderTotals(lines, couponCode);
+    totals = await computeOrderTotals(lines, couponCode, "cod");
   } catch {
     return NextResponse.json({ error: "Could not verify order contents." }, { status: 400 });
   }
@@ -62,7 +62,7 @@ export async function POST(request: Request) {
       status: "pending",
       subtotal: totals.subtotal,
       discount: totals.discount,
-      shipping_fee: totals.shippingFee,
+      shipping_fee: totals.shippingFee + totals.codFee,
       tax: totals.tax,
       total: totals.total,
       coupon_code: totals.couponCode,
@@ -109,6 +109,7 @@ export async function POST(request: Request) {
       subtotal: totals.subtotal,
       discount: totals.discount,
       shipping_fee: totals.shippingFee,
+      cod_fee: totals.codFee,
       tax: totals.tax,
       total: totals.total,
       coupon_code: totals.couponCode,

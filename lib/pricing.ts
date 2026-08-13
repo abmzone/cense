@@ -1,6 +1,9 @@
 import { createAdminClient } from "./supabase/admin";
 import { getSettings } from "./data/settings";
 
+/** Flat surcharge for paying cash on delivery, in paise. */
+export const COD_SURCHARGE = 2000;
+
 export interface PricedLine {
   productId: string;
   variantId: string;
@@ -17,6 +20,7 @@ export interface OrderTotals {
   discount: number;
   shippingFee: number;
   tax: number;
+  codFee: number;
   total: number;
   couponCode: string | null;
   minimumOrderValue: number;
@@ -30,7 +34,8 @@ export interface OrderTotals {
  */
 export async function computeOrderTotals(
   lines: { variantId: string; quantity: number }[],
-  couponCode?: string | null
+  couponCode?: string | null,
+  paymentMethod?: "razorpay" | "cod"
 ): Promise<OrderTotals> {
   const admin = createAdminClient();
 
@@ -96,7 +101,8 @@ export async function computeOrderTotals(
   const shippingFee =
     taxableAmount >= settings.free_shipping_threshold ? 0 : settings.standard_shipping_fee;
   const tax = Math.round((taxableAmount * settings.tax_rate_percent) / 100);
-  const total = taxableAmount + shippingFee + tax;
+  const codFee = paymentMethod === "cod" ? COD_SURCHARGE : 0;
+  const total = taxableAmount + shippingFee + tax + codFee;
 
   return {
     resolvedLines,
@@ -104,6 +110,7 @@ export async function computeOrderTotals(
     discount,
     shippingFee,
     tax,
+    codFee,
     total,
     couponCode: appliedCouponCode,
     minimumOrderValue: settings.minimum_order_value,
