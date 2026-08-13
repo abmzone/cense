@@ -329,7 +329,7 @@ export function CheckoutForm({ codEnabled }: Props) {
                 checked={paymentMethod === "cod"}
                 onChange={() => setPaymentMethod("cod")}
               />
-              Cash on Delivery {!codEnabled && "(currently unavailable)"}
+              Cash on Delivery (+ ₹20) {!codEnabled && "(currently unavailable)"}
             </label>
           </div>
         </div>
