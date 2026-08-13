@@ -14,6 +14,7 @@ export const SITE = {
 
 export const MAIN_NAV = [
   { label: "Shop", href: "/shop" },
+  { label: "About Kamakhya", href: "/kamakhya" },
   { label: "Our Story", href: "/story" },
   { label: "Ingredients", href: "/ingredients" },
   { label: "Journal", href: "/journal" },
