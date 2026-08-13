@@ -187,8 +187,16 @@ export default async function HomePage() {
       </section>
 
       {/* Ingredients */}
-      <section className="bg-maroon py-28 text-warm-white">
-        <Container>
+      <section className="relative overflow-hidden py-28 text-warm-white">
+        <Image
+          src="/ingredients-section/valley-backdrop.jpg"
+          alt=""
+          aria-hidden="true"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-maroon/85" />
+        <Container className="relative">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.3em] text-warm-white/70">
               Essential Oils from Assam &amp; Meghalaya
