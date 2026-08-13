@@ -4,6 +4,7 @@ import { computeOrderTotals } from "@/lib/pricing";
 import { checkPincodeServiceability } from "@/lib/delhivery";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
+import { sendOrderConfirmationEmail } from "@/lib/email/order-confirmation";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -125,6 +126,27 @@ export async function POST(request: Request) {
   if (totals.couponCode) {
     await admin.rpc("increment_coupon_usage", { p_code: totals.couponCode });
   }
+
+  await sendOrderConfirmationEmail({
+    order: {
+      order_number: order.order_number,
+      email: order.email,
+      payment_method: "razorpay",
+      subtotal: totals.subtotal,
+      discount: totals.discount,
+      shipping_fee: totals.shippingFee,
+      tax: totals.tax,
+      total: totals.total,
+      coupon_code: totals.couponCode,
+      shipping_address: shippingAddress,
+    },
+    items: totals.resolvedLines.map((line) => ({
+      product_name: line.productName,
+      variant_label: line.variantLabel,
+      unit_price: line.unitPrice,
+      quantity: line.quantity,
+    })),
+  });
 
   return NextResponse.json({ orderNumber: order.order_number });
 }
