@@ -98,35 +98,33 @@ export default async function HomePage() {
 
       {/* About Kamakhya */}
       <section className="py-28">
-        <Container>
-          <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
-            <Reveal>
-              <Image
-                src="/kamakhya/temple-collage.jpg"
-                alt="Illustrated collage of the Kamakhya Temple on Nilachala Hill, with palm trees, temple domes and floral motifs"
-                width={1600}
-                height={1066}
-                className="h-auto w-full"
-              />
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="text-xs uppercase tracking-[0.3em] text-terracotta">
-                About Kamakhya
-              </p>
-              <h2 className="mt-6 font-serif text-4xl leading-tight text-ink md:text-5xl">
-                The Story of Kamakhya
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-ink-soft">
-                Legend says a goddess fell here. Kamakhya is one of India&rsquo;s most
-                significant Shakti Peethas, where myth, Tantra and devotion have converged on a
-                single Assam hillside for centuries.
-              </p>
-              <ButtonLink href="/kamakhya" variant="ghost" className="mt-6 px-0">
-                Know More
-              </ButtonLink>
-            </Reveal>
-          </div>
-        </Container>
+        <div className="grid items-center gap-y-10 md:grid-cols-[3fr_2fr] md:gap-x-16">
+          <Reveal>
+            <Image
+              src="/kamakhya/temple-collage.jpg"
+              alt="Illustrated collage of the Kamakhya Temple on Nilachala Hill, with palm trees, temple domes and floral motifs"
+              width={1600}
+              height={1066}
+              className="h-auto w-full"
+            />
+          </Reveal>
+          <Reveal delay={0.1} className="px-6 md:pr-12 lg:pr-20">
+            <p className="text-xs uppercase tracking-[0.3em] text-terracotta">
+              About Kamakhya
+            </p>
+            <h2 className="mt-6 font-serif text-4xl leading-tight text-ink md:text-5xl">
+              The Story of Kamakhya
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-ink-soft">
+              Legend says a goddess fell here. Kamakhya is one of India&rsquo;s most
+              significant Shakti Peethas, where myth, Tantra and devotion have converged on a
+              single Assam hillside for centuries.
+            </p>
+            <ButtonLink href="/kamakhya" variant="ghost" className="mt-6 px-0">
+              Know More
+            </ButtonLink>
+          </Reveal>
+        </div>
       </section>
 
       {/* Our Story */}
