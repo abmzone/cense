@@ -76,8 +76,15 @@ export default async function HomePage() {
       </section>
 
       {/* Featured products */}
-      <section className="py-28">
-        <Container>
+      <section className="relative overflow-hidden py-28">
+        <Image
+          src="/shop/collection-bg.jpg"
+          alt=""
+          aria-hidden="true"
+          fill
+          className="pointer-events-none hidden select-none object-cover object-[80%_70%] md:block"
+        />
+        <Container className="relative">
           <Reveal>
             <div className="flex items-end justify-between">
               <h2 className="font-serif text-4xl text-ink md:text-5xl">The Collection</h2>
