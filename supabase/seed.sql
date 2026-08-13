@@ -111,17 +111,24 @@ values ('WELCOME10', 'percentage', 10, 0, 500, now() + interval '1 year', true)
 on conflict (code) do nothing;
 
 -- Journal ---------------------------------------------------------------------
-insert into journal_posts (slug, title, excerpt, content, published_at, seo_title, seo_description)
+insert into journal_posts (slug, title, excerpt, content, cover_image, published_at, seo_title, seo_description)
 values
   (
     'second-life-of-temple-flowers',
     'From an Offering to a Fragrance',
     'Every day, flowers are offered at the Kamakhya Temple as acts of devotion. Here is how a part of their story travels beyond the temple.',
-    'Every day, flowers are offered at the Kamakhya Temple as acts of devotion — hibiscus, marigold, rose and jasmine. After their ritual journey, Cense carefully collects a portion of these flowers, dries them by hand, and grinds them into a base for incense — blended with dhuna resin from Karbi Anglong and agarwood native to Assam.
+    'There''s a particular hour at Kamakhya, just after sunrise, when the walk up to the temple is already crowded — not with tourists yet, but with people who come every single day. Flower sellers arranging hibiscus into small woven baskets. Someone ringing a bell somewhere out of sight. The smell of the previous night''s incense still hanging in the stone corridors. We''ve stood in that crowd more mornings than we can count, and it never quite stops feeling like the start of something, even though for the temple it''s simply Tuesday.
 
-Cense began with a simple question: what if the spirit of a place could be experienced through fragrance? Working with a small collective of women artisans in Assam, we transform devotion into a scent that carries Kamakhya, and Assam, into the everyday rituals of a home.
+Hibiscus, marigold, rose, jasmine — these are offered by the thousands, every day, as acts of devotion that have nothing to do with us. That''s important to say plainly, because it would be easy to romanticise it otherwise. People come to Kamakhya for reasons that are theirs alone. We''re not part of that moment. We arrive after it.
 
-The result is not a religious product. It is a fragrance house that begins with devotion and ends at home, treating what was offered with the same care it was given the first time. By giving these flowers a second life, Cense also keeps valuable organic material from becoming waste — a quiet, secondary benefit of a process built around fragrance first.',
+What happens next is the part we do get to be involved in. After their ritual journey, a portion of these flowers is carefully collected rather than left behind. They''re dried by hand, over several days, spread out and turned so they don''t clump or mould — a slower process than it sounds, and one that a small collective of women artisans in Assam has gotten quietly excellent at. Once dry, the petals are ground into a fine base and blended with dhuna resin carried down from the hills of Karbi Anglong, and agarwood that''s native to this part of the country. Nothing synthetic gets added at any point. It''s a slow way to make something, but it''s the only way we''ve found that keeps the flowers recognisable in the finished stick — not just as an ingredient, but as the actual thing they were.
+
+Cense started with a question more than a plan: what if the spirit of a place could be carried home in a scent, the way a photograph carries a moment? Assam has a particular smell to it that''s hard to describe to anyone who hasn''t spent time here — wet stone, resin, something floral underneath all of it. We wanted to bottle that, and Kamakhya felt like the right place to start, given how much of the temple''s daily life already runs on flowers and fire.
+
+We want to be careful here, because this isn''t a religious product and we don''t want to imply otherwise. We''re not claiming that a Cense stick carries divine energy, or that burning one does anything more than fill a room with a fragrance we happen to think is worth your time. What we are saying is that the flowers themselves travel — from an act of devotion at the temple, through a few quiet days of drying and grinding in Assam, into a box, and eventually onto a shelf or a windowsill in someone''s home. The same flower, further along in its life, doing something useful with the time it has left.
+
+That''s also, incidentally, where the sustainability part of this story sits — not at the front of it, but underneath. By collecting these flowers instead of letting them go to landfill, we keep a fair amount of organic material out of the waste stream. It''s a real benefit, and we''re glad it exists, but it was never the whole reason we started. The reason was closer to what''s happening in the photo above: a single stick, in a plain wooden holder, on an ordinary table, with light coming through the window and smoke going somewhere it doesn''t matter. Devotion, then distance, then a fragrance in someone''s home. That''s the whole arc, really. We just happened to be the ones who got to shape it.',
+    '/journal/offering-to-fragrance.jpg',
     '2026-01-12',
     'From an Offering to a Fragrance | Cense Journal',
     'How Cense transforms flowers offered at the Kamakhya Temple into handcrafted incense, working with women artisans across Assam.'
@@ -133,6 +140,7 @@ The result is not a religious product. It is a fragrance house that begins with 
     'Most conventional incense relies on charcoal as a combustible base — it''s cheap, burns predictably, and is heavy with smoke. Cense uses a joss powder and natural binder base instead, built around reclaimed temple flowers, dhuna resin and essential oils.
 
 The difference shows in the burn: a slower release, a lighter smoke, and a scent that reads closer to the raw materials themselves rather than a charcoal aftertaste layered on top.',
+    '/journal/why-charcoal-free.jpg',
     '2026-02-03',
     'Why Cense Is Charcoal-Free | Cense Journal',
     'Cense incense is built on a joss powder and natural binder base instead of charcoal — here is why that matters for scent and for smoke.'
