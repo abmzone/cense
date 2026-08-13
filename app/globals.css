@@ -31,7 +31,7 @@
   --font-serif: var(--font-cormorant);
 
   --animate-fade-in: fade-in 0.8s ease forwards;
-  --animate-marquee: marquee 20s linear infinite;
+  --animate-marquee: marquee 34s linear infinite;
 
   @keyframes fade-in {
     from {
