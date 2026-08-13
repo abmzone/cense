@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/container";
 import { AccountNav } from "@/components/account/account-nav";
 import { SignOutButton } from "@/components/account/sign-out-button";
 import { createClient } from "@/lib/supabase/server";
+import { claimGuestOrders } from "@/lib/data/orders";
 
 export default async function AccountDashboardLayout({
   children,
@@ -15,6 +16,14 @@ export default async function AccountDashboardLayout({
   } = await supabase.auth.getUser();
 
   if (!user) redirect("/account/login");
+
+  if (user.email) {
+    try {
+      await claimGuestOrders(user.id, user.email);
+    } catch {
+      // Non-fatal — worst case, guest orders stay unclaimed until the next visit.
+    }
+  }
 
   return (
     <section className="py-20">
