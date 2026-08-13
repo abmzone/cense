@@ -137,9 +137,15 @@ That''s also, incidentally, where the sustainability part of this story sits —
     'why-charcoal-free-matters',
     'Why We Don''t Use Charcoal',
     'Most conventional incense relies on charcoal as a base — cheap, fast-burning, and heavy with smoke. Here''s why we chose otherwise.',
-    'Most conventional incense relies on charcoal as a combustible base — it''s cheap, burns predictably, and is heavy with smoke. Cense uses a joss powder and natural binder base instead, built around reclaimed temple flowers, dhuna resin and essential oils.
+    'Walk into almost any incense shop in India and you''ll notice the same thing before you notice anything else: soot. A thin grey film on the shelves, on the wall behind the counter, sometimes on the shopkeeper''s fingers. That''s charcoal doing what charcoal does — burning fast, burning hot, and leaving a residue behind. It isn''t a flaw exactly. It''s just what the vast majority of incense in this country is built on, and has been for a very long time.
 
-The difference shows in the burn: a slower release, a lighter smoke, and a scent that reads closer to the raw materials themselves rather than a charcoal aftertaste layered on top.',
+Charcoal ends up in incense for a simple reason: it''s an excellent combustion base. Mixed into a paste and packed around a bamboo core, it catches easily, burns at a steady, predictable rate, and it''s cheap — genuinely cheap, in a way that matters when you''re producing incense at the volume most of the market demands. None of that is a criticism. It''s physics and economics doing what they do, and it''s why charcoal shows up in almost every mass-market stick you''ve ever bought.
+
+We chose not to build Cense that way, and the reason is less about avoiding something bad and more about wanting something specific. Our sticks are built on a joss powder and natural binder base instead — a plant-derived paste that holds everything together around the bamboo core without needing a fast-burning combustible at its centre. Into that base goes what actually gives Cense its character: reclaimed temple flowers from Kamakhya, dhuna resin carried down from Karbi Anglong, and essential oils drawn from farms across Assam and Meghalaya.
+
+The difference is obvious the moment you light one. A charcoal-based stick tends to flare and then settle into a strong, fairly one-note burn — smoke first, fragrance second. What we use releases more slowly, with a noticeably lighter trail of smoke, and it lets the raw materials speak for themselves instead of layering a charcoal note over everything else. Dhuna smells like dhuna. Agarwood smells like agarwood. You''re not smelling charcoal with hints of something else underneath it.
+
+None of this is us claiming to have invented anything — joss powder bases have been used by incense makers across South and Southeast Asia for a long time. What we can say is that it was a deliberate choice for us, made early on, and one we''ve stuck with even though it''s slower and more expensive than the alternative. Cense was always meant to be a small-batch fragrance house rather than a high-volume incense brand, and the base every stick is built on is one of the clearest ways that shows up before you''ve even lit the first one.',
     '/journal/why-charcoal-free.jpg',
     '2026-02-03',
     'Why Cense Is Charcoal-Free | Cense Journal',
