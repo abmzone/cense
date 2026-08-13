@@ -15,7 +15,7 @@ export const PROCESS_STEPS = [
   },
   {
     title: "Packed",
-    image: "/process/packed-warehouse-guwahati.jpg",
+    image: "/process/packed-at-home.jpg",
     tone: "neutral" as const,
     description:
       "Finished sticks are air-cured and packed at our warehouse in Guwahati, ready to bring the spirit of Kamakhya home.",
