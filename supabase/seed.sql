@@ -95,14 +95,14 @@ values (
   'Light the tip until it glows, then gently blow out the flame. Rest the stick in a heat-safe holder and allow the fragrance to settle in a ventilated room.',
   'combo',
   'The Complete Collection — All Three Cense Fragrances | Cense',
-  'One box each of Where the Flowers Rested, Rain Meets the Grass, and Into the Forest — the full Cense range in one gift set.',
+  'One box each of Where the Flowers Rested, Rain Meets the Grass, and Into the Forest — the full Cense range in one set.',
   array['combo', 'gift-set', 'bestseller']
 )
 on conflict (id) do nothing;
 
 insert into product_variants (id, product_id, label, weight_grams, burn_time_minutes, price, compare_at_price, stock, sku)
 values
-  ('00000000-0000-0000-0004-000000000001', '00000000-0000-0000-0000-000000000004', '3 x 40g Gift Set', 120, 45, 21000, 25500, 50, 'CENSE-COMBO-SET')
+  ('00000000-0000-0000-0004-000000000001', '00000000-0000-0000-0000-000000000004', '3 x 40g', 120, 45, 21000, 25500, 50, 'CENSE-COMBO-SET')
 on conflict (id) do nothing;
 
 -- Sample coupon ---------------------------------------------------------------

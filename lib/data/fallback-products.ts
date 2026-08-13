@@ -177,7 +177,7 @@ export const FALLBACK_PRODUCTS: Product[] = [
     is_active: true,
     seo_title: "The Complete Collection — All Three Cense Fragrances | Cense",
     seo_description:
-      "One box each of Where the Flowers Rested, Rain Meets the Grass, and Into the Forest — the full Cense range in one gift set.",
+      "One box each of Where the Flowers Rested, Rain Meets the Grass, and Into the Forest — the full Cense range in one set.",
     tags: ["combo", "gift-set", "bestseller"],
     images: [
       {
@@ -192,7 +192,7 @@ export const FALLBACK_PRODUCTS: Product[] = [
       {
         id: "var-4-set",
         product_id: "00000000-0000-0000-0000-000000000004",
-        label: "3 x 40g Gift Set",
+        label: "3 x 40g",
         weight_grams: 120,
         burn_time_minutes: 45,
         price: 21000,
