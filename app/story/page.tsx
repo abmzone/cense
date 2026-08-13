@@ -134,7 +134,8 @@ export default function StoryPage() {
           <Reveal>
             <div className="aspect-[4/3]">
               <PlaceholderImage
-                alt="Women artisans hand-rolling incense sticks in a workshop in Assam"
+                src="/story/hand-rolled-drying.jpg"
+                alt="Freshly hand-rolled Cense incense sticks laid out to dry on a rack"
                 tone="woody"
                 className="h-full w-full"
               />
