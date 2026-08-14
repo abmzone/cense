@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
@@ -16,9 +17,36 @@ export function CartDrawer() {
   const lines = useCart((s) => s.lines);
   const updateQuantity = useCart((s) => s.updateQuantity);
   const removeLine = useCart((s) => s.removeLine);
+  const couponCode = useCart((s) => s.couponCode);
+  const applyCoupon = useCart((s) => s.applyCoupon);
+
+  const [couponInput, setCouponInput] = useState(couponCode ?? "");
+  const [couponStatus, setCouponStatus] = useState<{ message: string; valid: boolean } | null>(
+    null
+  );
+  const [discount, setDiscount] = useState(0);
+
   const subtotal = cartSubtotal(lines);
   const minimumOrderValue = useMinimumOrderValue();
   const belowMinimum = subtotal < minimumOrderValue;
+
+  async function onApplyCoupon() {
+    if (!couponInput.trim()) return;
+    const res = await fetch("/api/coupons/validate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code: couponInput, subtotal }),
+    });
+    const data = await res.json();
+    setCouponStatus({ message: data.message, valid: data.valid });
+    if (data.valid) {
+      applyCoupon(data.code);
+      setDiscount(data.discount);
+    } else {
+      applyCoupon(null);
+      setDiscount(0);
+    }
+  }
 
   return (
     <AnimatePresence>
@@ -99,10 +127,36 @@ export function CartDrawer() {
 
             {lines.length > 0 && (
               <div className="border-t border-line px-6 py-6">
+                <div className="mb-4 flex gap-2">
+                  <input
+                    value={couponInput}
+                    onChange={(e) => setCouponInput(e.target.value)}
+                    placeholder="Coupon code"
+                    className="w-full border border-ink/20 bg-transparent px-3 py-2 text-sm focus:border-maroon focus:outline-none"
+                  />
+                  <button
+                    onClick={onApplyCoupon}
+                    className="whitespace-nowrap border border-ink/30 px-4 text-xs uppercase tracking-widest text-ink hover:border-maroon hover:text-maroon"
+                  >
+                    Apply
+                  </button>
+                </div>
+                {couponStatus && (
+                  <p className={`mb-4 text-xs ${couponStatus.valid ? "text-maroon" : "text-ink-soft"}`}>
+                    {couponStatus.message}
+                  </p>
+                )}
+
                 <div className="mb-4 flex items-center justify-between text-sm text-ink-soft">
                   <span>Subtotal</span>
                   <span className="text-ink">{formatINR(subtotal)}</span>
                 </div>
+                {discount > 0 && (
+                  <div className="mb-4 flex items-center justify-between text-sm text-ink-soft">
+                    <span>Discount</span>
+                    <span className="text-maroon">-{formatINR(discount)}</span>
+                  </div>
+                )}
                 <p className="mb-4 text-xs text-ink-soft">
                   Shipping and taxes calculated at checkout.
                 </p>
