@@ -6,14 +6,15 @@ import { NewsletterForm } from "@/components/layout/newsletter-form";
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-line bg-off-white">
-      <img
-        src="/footer/temple-overlay.png"
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 right-0 hidden w-80 select-none opacity-80 md:block lg:w-[26rem]"
-      />
-      <Container className="relative grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+    <footer className="border-t border-line bg-off-white">
+      <div className="relative overflow-hidden">
+        <img
+          src="/footer/temple-overlay.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-0 right-0 w-44 select-none opacity-80 sm:w-56 md:w-80 lg:w-[26rem]"
+        />
+        <Container className="relative grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div>
           <img src="/cense-logo.svg" alt={SITE.name} className="h-6 w-auto" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-soft">
@@ -63,7 +64,8 @@ export function Footer() {
           </p>
           <NewsletterForm />
         </div>
-      </Container>
+        </Container>
+      </div>
 
       <div className="border-t border-line py-6">
         <Container className="flex flex-col items-center justify-between gap-2 text-xs text-ink-soft md:flex-row">
