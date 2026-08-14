@@ -47,6 +47,19 @@ export default function StoryPage() {
 
           <Reveal delay={0.1}>
             <div className="mt-14 space-y-6 text-base leading-relaxed text-ink-soft">
+              <div className="float-right ml-6 mb-4 w-32 rotate-2 bg-warm-white p-2 pb-4 shadow-lg sm:w-44 sm:ml-8">
+                <div className="aspect-[3/4] w-full overflow-hidden">
+                  <PlaceholderImage
+                    src="/story/first-prototype.jpg"
+                    alt="A hand holding one of Cense's first prototype incense sticks"
+                    tone="woody"
+                    className="h-full w-full"
+                  />
+                </div>
+                <p className="mt-2 text-center font-serif text-[11px] italic leading-snug text-ink-soft">
+                  Our first successful prototype — circa May 2026
+                </p>
+              </div>
               <p>
                 It started small — spare flowers collected from Kamakhya, and a lot of
                 evenings spent experimenting at a home dining table. Long before there was a
