@@ -127,6 +127,9 @@ export function CheckoutForm({ codEnabled }: Props) {
         lines: cartLinePayload,
         couponCode,
         destinationPincode: form.postalCode,
+        email: form.email,
+        phone: form.phone,
+        shippingAddress,
       }),
     });
     const data = await res.json();
@@ -150,14 +153,7 @@ export function CheckoutForm({ codEnabled }: Props) {
             const verifyRes = await fetch("/api/razorpay/verify", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                ...response,
-                email: form.email,
-                phone: form.phone,
-                shippingAddress,
-                lines: cartLinePayload,
-                couponCode,
-              }),
+              body: JSON.stringify(response),
             });
             const verifyData = await verifyRes.json();
             if (!verifyRes.ok) throw new Error(verifyData.error ?? "Payment verification failed.");

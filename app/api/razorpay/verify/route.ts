@@ -1,23 +1,10 @@
 import { NextResponse } from "next/server";
 import { verifyRazorpaySignature } from "@/lib/razorpay";
-import { computeOrderTotals } from "@/lib/pricing";
-import { checkPincodeServiceability } from "@/lib/delhivery";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient } from "@/lib/supabase/server";
-import { sendOrderConfirmationEmail } from "@/lib/email/order-confirmation";
+import { confirmRazorpayOrder } from "@/lib/data/orders";
 
 export async function POST(request: Request) {
-  const body = await request.json();
-  const {
-    razorpay_order_id,
-    razorpay_payment_id,
-    razorpay_signature,
-    email,
-    phone,
-    shippingAddress,
-    lines,
-    couponCode,
-  } = body;
+  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = await request.json();
 
   if (
     typeof razorpay_order_id !== "string" ||
@@ -37,116 +24,19 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Payment verification failed." }, { status: 400 });
   }
 
-  if (!Array.isArray(lines) || lines.length === 0) {
-    return NextResponse.json({ error: "Your cart is empty." }, { status: 400 });
-  }
-
-  let totals;
-  try {
-    totals = await computeOrderTotals(lines, couponCode);
-  } catch {
-    return NextResponse.json({ error: "Could not verify order contents." }, { status: 400 });
-  }
-
-  if (totals.belowMinimumOrder) {
-    return NextResponse.json(
-      { error: `Minimum order value is ₹${(totals.minimumOrderValue / 100).toFixed(2)}.` },
-      { status: 400 }
-    );
-  }
-
-  if (typeof shippingAddress?.postal_code === "string") {
-    const { serviceable } = await checkPincodeServiceability(
-      shippingAddress.postal_code,
-      "Prepaid"
-    );
-    if (!serviceable) {
-      return NextResponse.json(
-        { error: "Sorry, we can't deliver to this pincode yet." },
-        { status: 400 }
-      );
-    }
-  }
-
-  const supabaseServer = await createClient();
-  const {
-    data: { user },
-  } = await supabaseServer.auth.getUser();
+  // Idempotent: no-ops if the webhook already confirmed this order first.
+  await confirmRazorpayOrder(razorpay_order_id, razorpay_payment_id);
 
   const admin = createAdminClient();
-  const orderNumber = `CS${Date.now().toString(36).toUpperCase()}`;
-
-  const { data: order, error } = await admin
+  const { data: order } = await admin
     .from("orders")
-    .insert({
-      order_number: orderNumber,
-      user_id: user?.id ?? null,
-      email,
-      phone,
-      status: "confirmed",
-      subtotal: totals.subtotal,
-      discount: totals.discount,
-      shipping_fee: totals.shippingFee,
-      tax: totals.tax,
-      total: totals.total,
-      coupon_code: totals.couponCode,
-      payment_method: "razorpay",
-      razorpay_order_id,
-      razorpay_payment_id,
-      shipping_address: shippingAddress,
-    })
-    .select()
-    .single();
+    .select("order_number")
+    .eq("razorpay_order_id", razorpay_order_id)
+    .maybeSingle();
 
-  if (error || !order) {
-    return NextResponse.json({ error: "Could not save your order." }, { status: 500 });
+  if (!order) {
+    return NextResponse.json({ error: "Could not find your order." }, { status: 404 });
   }
-
-  await admin.from("order_items").insert(
-    totals.resolvedLines.map((line) => ({
-      order_id: order.id,
-      product_id: line.productId,
-      variant_id: line.variantId,
-      product_name: line.productName,
-      variant_label: line.variantLabel,
-      unit_price: line.unitPrice,
-      quantity: line.quantity,
-    }))
-  );
-
-  await Promise.all(
-    totals.resolvedLines.map((line) =>
-      admin.rpc("decrement_variant_stock", {
-        p_variant_id: line.variantId,
-        p_qty: line.quantity,
-      })
-    )
-  );
-
-  if (totals.couponCode) {
-    await admin.rpc("increment_coupon_usage", { p_code: totals.couponCode });
-  }
-
-  await sendOrderConfirmationEmail({
-    order: {
-      order_number: order.order_number,
-      email: order.email,
-      payment_method: "razorpay",
-      subtotal: totals.subtotal,
-      discount: totals.discount,
-      shipping_fee: totals.shippingFee,
-      tax: totals.tax,
-      total: totals.total,
-      coupon_code: totals.couponCode,
-      shipping_address: shippingAddress,
-    },
-    items: totals.resolvedLines.map((line) => ({
-      product_name: line.productName,
-      variant_label: line.variantLabel,
-      unit_price: line.unitPrice,
-      quantity: line.quantity,
-    })),
-  });
 
   return NextResponse.json({ orderNumber: order.order_number });
 }

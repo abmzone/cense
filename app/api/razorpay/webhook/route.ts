@@ -1,14 +1,16 @@
 import { NextResponse } from "next/server";
 import { verifyRazorpayWebhookSignature } from "@/lib/razorpay";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { confirmRazorpayOrder } from "@/lib/data/orders";
 
 /**
  * Reconciliation endpoint for Razorpay server-to-server webhooks
- * (configure at Razorpay Dashboard → Settings → Webhooks). The primary
- * order-confirmation path is /api/razorpay/verify, called directly from the
- * checkout page after a successful payment — this webhook exists as a
- * fallback in case that client-side call never completes (e.g. the tab
- * closes right after payment).
+ * (configure at Razorpay Dashboard → Settings → Webhooks, event:
+ * payment.captured). The primary order-confirmation path is
+ * /api/razorpay/verify, called directly from the checkout page after a
+ * successful payment — this webhook exists as a fallback in case that
+ * client-side call never completes (e.g. the tab closes right after
+ * payment). Both call the same idempotent confirmRazorpayOrder(), so
+ * whichever fires first wins and the other is a safe no-op.
  */
 export async function POST(request: Request) {
   const rawBody = await request.text();
@@ -21,14 +23,11 @@ export async function POST(request: Request) {
   const event = JSON.parse(rawBody);
 
   if (event.event === "payment.captured") {
-    const razorpayOrderId = event.payload?.payment?.entity?.order_id;
-    if (razorpayOrderId) {
-      const admin = createAdminClient();
-      await admin
-        .from("orders")
-        .update({ status: "confirmed" })
-        .eq("razorpay_order_id", razorpayOrderId)
-        .eq("status", "pending");
+    const payment = event.payload?.payment?.entity;
+    const razorpayOrderId = payment?.order_id;
+    const razorpayPaymentId = payment?.id;
+    if (razorpayOrderId && razorpayPaymentId) {
+      await confirmRazorpayOrder(razorpayOrderId, razorpayPaymentId);
     }
   }
 
