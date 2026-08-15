@@ -8,7 +8,7 @@ export default async function AdminOrdersPage() {
   const admin = createAdminClient();
   const { data: orders } = await admin
     .from("orders")
-    .select("id, order_number, email, status, total, created_at")
+    .select("id, order_number, email, status, total, created_at, payment_method")
     .order("created_at", { ascending: false });
 
   return (

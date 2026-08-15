@@ -12,6 +12,7 @@ export interface AdminOrderRow {
   status: OrderStatus;
   total: number;
   created_at: string;
+  payment_method: "razorpay" | "cod";
 }
 
 const STATUSES: OrderStatus[] = [
@@ -23,9 +24,26 @@ const STATUSES: OrderStatus[] = [
   "cancelled",
 ];
 
+// Razorpay orders are written as "pending" the moment checkout starts and
+// should flip to "confirmed" within seconds of payment. One still sitting
+// at "pending" past this age means the payment either never completed or
+// the confirmation (client callback + webhook) never landed — worth a
+// manual look rather than assuming it's just an abandoned cart.
+const STUCK_THRESHOLD_MS = 20 * 60 * 1000;
+
+function isStuck(order: AdminOrderRow) {
+  return (
+    order.payment_method === "razorpay" &&
+    order.status === "pending" &&
+    Date.now() - new Date(order.created_at).getTime() > STUCK_THRESHOLD_MS
+  );
+}
+
 export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<OrderStatus | "all">("all");
+
+  const stuckCount = useMemo(() => orders.filter(isStuck).length, [orders]);
 
   const filtered = useMemo(() => {
     return orders.filter((order) => {
@@ -59,6 +77,13 @@ export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
 
   return (
     <div>
+      {stuckCount > 0 && (
+        <div className="mb-4 border border-maroon/40 bg-maroon/5 px-4 py-3 text-sm text-maroon">
+          ⚠ {stuckCount} Razorpay {stuckCount === 1 ? "order has" : "orders have"} been stuck on
+          &ldquo;pending&rdquo; for over 20 minutes — check whether payment actually went through
+          before assuming it&apos;s an abandoned cart.
+        </div>
+      )}
       <div className="flex flex-wrap items-center gap-3">
         <input
           placeholder="Search order number or email"
@@ -99,14 +124,20 @@ export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
           </thead>
           <tbody>
             {filtered.map((order) => (
-              <tr key={order.id} className="border-b border-line">
+              <tr
+                key={order.id}
+                className={`border-b border-line ${isStuck(order) ? "bg-maroon/5" : ""}`}
+              >
                 <td className="py-3">
                   <Link href={`/admin/orders/${order.id}`} className="text-ink hover:text-maroon">
                     {order.order_number}
                   </Link>
                 </td>
                 <td className="py-3 text-ink-soft">{order.email}</td>
-                <td className="py-3 capitalize text-ink-soft">{order.status}</td>
+                <td className="py-3 capitalize text-ink-soft">
+                  {order.status}
+                  {isStuck(order) && <span className="ml-2 text-maroon">⚠ stuck</span>}
+                </td>
                 <td className="py-3 text-right text-ink">{formatINR(order.total)}</td>
                 <td className="py-3 text-right text-ink-soft">
                   {new Date(order.created_at).toLocaleDateString("en-IN")}
