@@ -166,6 +166,16 @@ export function CheckoutForm({ codEnabled }: Props) {
         },
         modal: { ondismiss: () => reject(new Error("Payment was cancelled.")) },
       });
+      // Timeouts and declines don't always reach `handler` — this is the
+      // only reliable way to catch those and surface a clear failure
+      // message instead of leaving the customer on an ambiguous state.
+      razorpay.on("payment.failed", (response) => {
+        reject(
+          new Error(
+            response.error?.description ?? "Payment failed. Please try again."
+          )
+        );
+      });
       razorpay.open();
     });
   }

@@ -30,12 +30,15 @@ export async function POST(request: Request) {
   const admin = createAdminClient();
   const { data: order } = await admin
     .from("orders")
-    .select("order_number")
+    .select("order_number, status")
     .eq("razorpay_order_id", razorpay_order_id)
     .maybeSingle();
 
-  if (!order) {
-    return NextResponse.json({ error: "Could not find your order." }, { status: 404 });
+  // Only ever tell the customer "confirmed" if the order's own status says
+  // so — a matching row existing isn't enough, since it may still be
+  // "pending" if the payment didn't actually go through.
+  if (!order || order.status !== "confirmed") {
+    return NextResponse.json({ error: "Payment could not be confirmed." }, { status: 400 });
   }
 
   return NextResponse.json({ orderNumber: order.order_number });
