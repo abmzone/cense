@@ -45,7 +45,7 @@ export const FALLBACK_PRODUCTS: Product[] = [
       {
         id: "var-1-40",
         product_id: "00000000-0000-0000-0000-000000000001",
-        label: "40g · 20 sticks",
+        label: "20 sticks",
         weight_grams: 40,
         burn_time_minutes: 45,
         price: 8500,
@@ -94,7 +94,7 @@ export const FALLBACK_PRODUCTS: Product[] = [
       {
         id: "var-2-40",
         product_id: "00000000-0000-0000-0000-000000000002",
-        label: "40g · 20 sticks",
+        label: "20 sticks",
         weight_grams: 40,
         burn_time_minutes: 40,
         price: 8500,
@@ -143,7 +143,7 @@ export const FALLBACK_PRODUCTS: Product[] = [
       {
         id: "var-3-40",
         product_id: "00000000-0000-0000-0000-000000000003",
-        label: "40g · 20 sticks",
+        label: "20 sticks",
         weight_grams: 40,
         burn_time_minutes: 50,
         price: 8500,
@@ -159,7 +159,7 @@ export const FALLBACK_PRODUCTS: Product[] = [
     name: "The Complete Collection",
     tagline: "Three fragrances · One landscape",
     description:
-      "Bring the full Cense experience home. One 40g box of each fragrance — Where the Flowers Rested, Rain Meets the Grass, and Into the Forest — together in one set.",
+      "Bring the full Cense experience home. One 20-stick box of each fragrance — Where the Flowers Rested, Rain Meets the Grass, and Into the Forest — together in one set.",
     story:
       "Some mornings call for hibiscus and rose. Some call for rain on warm stone. Some call for the quiet of a forest. The Complete Collection is for when you are not sure which — one box of each, so the choice can wait until the moment asks for it.",
     fragrance_notes: ["Hibiscus & Rose", "Lemongrass & Rain", "Agarwood & Dhuna"],
@@ -192,10 +192,10 @@ export const FALLBACK_PRODUCTS: Product[] = [
       {
         id: "var-4-set",
         product_id: "00000000-0000-0000-0000-000000000004",
-        label: "3 x 40g",
+        label: "20 x 3 sticks",
         weight_grams: 120,
         burn_time_minutes: 45,
-        price: 21000,
+        price: 23000,
         compare_at_price: 25500,
         stock: 50,
         sku: "CENSE-COMBO-SET",

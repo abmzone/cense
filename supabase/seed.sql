@@ -30,7 +30,7 @@ on conflict (id) do nothing;
 
 insert into product_variants (id, product_id, label, weight_grams, burn_time_minutes, price, compare_at_price, stock, sku)
 values
-  ('00000000-0000-0000-0001-000000000001', '00000000-0000-0000-0000-000000000001', '40g · 20 sticks', 40, 45, 8500, null, 120, 'CENSE-WFR-40')
+  ('00000000-0000-0000-0001-000000000001', '00000000-0000-0000-0000-000000000001', '20 sticks', 40, 45, 8500, null, 120, 'CENSE-WFR-40')
 on conflict (id) do nothing;
 
 -- Rain Meets the Grass --------------------------------------------------------
@@ -54,7 +54,7 @@ on conflict (id) do nothing;
 
 insert into product_variants (id, product_id, label, weight_grams, burn_time_minutes, price, compare_at_price, stock, sku)
 values
-  ('00000000-0000-0000-0002-000000000001', '00000000-0000-0000-0000-000000000002', '40g · 20 sticks', 40, 40, 8500, null, 100, 'CENSE-RMG-40')
+  ('00000000-0000-0000-0002-000000000001', '00000000-0000-0000-0000-000000000002', '20 sticks', 40, 40, 8500, null, 100, 'CENSE-RMG-40')
 on conflict (id) do nothing;
 
 -- Into the Forest ---------------------------------------------------------
@@ -78,7 +78,7 @@ on conflict (id) do nothing;
 
 insert into product_variants (id, product_id, label, weight_grams, burn_time_minutes, price, compare_at_price, stock, sku)
 values
-  ('00000000-0000-0000-0003-000000000001', '00000000-0000-0000-0000-000000000003', '40g · 20 sticks', 40, 50, 8500, null, 90, 'CENSE-ITF-40')
+  ('00000000-0000-0000-0003-000000000001', '00000000-0000-0000-0000-000000000003', '20 sticks', 40, 50, 8500, null, 90, 'CENSE-ITF-40')
 on conflict (id) do nothing;
 
 -- The Complete Collection (combo) ---------------------------------------------
@@ -88,7 +88,7 @@ values (
   'the-complete-collection',
   'The Complete Collection',
   'Three fragrances · One landscape',
-  'Bring the full Cense experience home. One 40g box of each fragrance — Where the Flowers Rested, Rain Meets the Grass, and Into the Forest — together in one set.',
+  'Bring the full Cense experience home. One 20-stick box of each fragrance — Where the Flowers Rested, Rain Meets the Grass, and Into the Forest — together in one set.',
   'Some mornings call for hibiscus and rose. Some call for rain on warm stone. Some call for the quiet of a forest. The Complete Collection is for when you are not sure which — one box of each, so the choice can wait until the moment asks for it.',
   array['Hibiscus & Rose', 'Lemongrass & Rain', 'Agarwood & Dhuna'],
   array['Reclaimed temple flowers (hibiscus, rose, marigold, jasmine)', 'Lemongrass, citronella, vetiver and patchouli essential oils', 'Assam agarwood', 'Karbi Anglong dhuna resin', 'Bamboo core', 'Joss powder binder'],
@@ -102,7 +102,7 @@ on conflict (id) do nothing;
 
 insert into product_variants (id, product_id, label, weight_grams, burn_time_minutes, price, compare_at_price, stock, sku)
 values
-  ('00000000-0000-0000-0004-000000000001', '00000000-0000-0000-0000-000000000004', '3 x 40g', 120, 45, 21000, 25500, 50, 'CENSE-COMBO-SET')
+  ('00000000-0000-0000-0004-000000000001', '00000000-0000-0000-0000-000000000004', '20 x 3 sticks', 120, 45, 23000, 25500, 50, 'CENSE-COMBO-SET')
 on conflict (id) do nothing;
 
 -- Sample coupon ---------------------------------------------------------------

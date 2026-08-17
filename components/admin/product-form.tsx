@@ -258,7 +258,7 @@ export function ProductForm({ product }: { product?: Product }) {
           {variants.map((variant, i) => (
             <div key={i} className="grid gap-3 border border-line p-4 md:grid-cols-6">
               <input
-                placeholder="Label (e.g. 40g)"
+                placeholder="Label (e.g. 20 sticks)"
                 value={variant.label}
                 onChange={(e) => updateVariant(i, { label: e.target.value })}
                 className="border border-ink/20 bg-transparent px-2 py-2 text-sm focus:border-maroon focus:outline-none md:col-span-2"

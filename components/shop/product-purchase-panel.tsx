@@ -74,8 +74,8 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
 
       <dl className="mt-8 grid grid-cols-2 gap-4 border-y border-line py-6 text-sm">
         <div>
-          <dt className="text-ink-soft">Weight</dt>
-          <dd className="mt-1 text-ink">{variant.weight_grams}g</dd>
+          <dt className="text-ink-soft">Sticks</dt>
+          <dd className="mt-1 text-ink">{variant.label}</dd>
         </div>
         <div>
           <dt className="text-ink-soft">Burn Time</dt>

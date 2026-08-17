@@ -11,7 +11,7 @@ export type ProfileRole = "customer" | "admin";
 export interface ProductVariant {
   id: string;
   product_id: string;
-  label: string; // e.g. "40g"
+  label: string; // e.g. "20 sticks"
   weight_grams: number;
   burn_time_minutes: number;
   price: number; // paise
