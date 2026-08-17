@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { formatINR } from "@/lib/utils";
+import { formatINR, orderStatusLabel } from "@/lib/utils";
 
 export default async function AdminDashboardPage() {
   const admin = createAdminClient();
@@ -8,7 +8,7 @@ export default async function AdminDashboardPage() {
   const [{ data: orders }, { data: lowStock }] = await Promise.all([
     admin
       .from("orders")
-      .select("id, order_number, email, status, total, created_at")
+      .select("id, order_number, email, status, total, created_at, payment_method")
       .order("created_at", { ascending: false })
       .limit(200),
     admin
@@ -66,7 +66,9 @@ export default async function AdminDashboardPage() {
                     </Link>
                   </td>
                   <td className="py-3 text-ink-soft">{order.email}</td>
-                  <td className="py-3 capitalize text-ink-soft">{order.status}</td>
+                  <td className="py-3 capitalize text-ink-soft">
+                    {orderStatusLabel(order.status, order.payment_method)}
+                  </td>
                   <td className="py-3 text-right text-ink">{formatINR(order.total)}</td>
                 </tr>
               ))}

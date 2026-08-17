@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import type { OrderStatus } from "@/lib/types";
+import { orderStatusLabel } from "@/lib/utils";
 
 const STATUSES: OrderStatus[] = [
   "pending",
@@ -18,10 +19,12 @@ export function OrderStatusForm({
   orderId,
   currentStatus,
   currentTracking,
+  paymentMethod,
 }: {
   orderId: string;
   currentStatus: OrderStatus;
   currentTracking: string | null;
+  paymentMethod: "razorpay" | "cod";
 }) {
   const router = useRouter();
   const [status, setStatus] = useState(currentStatus);
@@ -53,7 +56,7 @@ export function OrderStatusForm({
         >
           {STATUSES.map((s) => (
             <option key={s} value={s}>
-              {s}
+              {orderStatusLabel(s, paymentMethod)}
             </option>
           ))}
         </select>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { orderStatusLabel } from "@/lib/utils";
 
 export default async function AccountOverviewPage() {
   const supabase = await createClient();
@@ -15,7 +16,7 @@ export default async function AccountOverviewPage() {
 
   const { data: recentOrders } = await supabase
     .from("orders")
-    .select("id, order_number, status, total, created_at")
+    .select("id, order_number, status, total, created_at, payment_method")
     .order("created_at", { ascending: false })
     .limit(3);
 
@@ -40,7 +41,9 @@ export default async function AccountOverviewPage() {
             {recentOrders.map((order) => (
               <li key={order.id} className="flex items-center justify-between py-4 text-sm">
                 <span className="text-ink">{order.order_number}</span>
-                <span className="capitalize text-ink-soft">{order.status}</span>
+                <span className="capitalize text-ink-soft">
+                  {orderStatusLabel(order.status, order.payment_method)}
+                </span>
               </li>
             ))}
           </ul>

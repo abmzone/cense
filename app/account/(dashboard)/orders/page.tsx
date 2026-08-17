@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
-import { formatINR } from "@/lib/utils";
+import { formatINR, orderStatusLabel } from "@/lib/utils";
 
 export const metadata: Metadata = { title: "Order History", robots: { index: false } };
 
@@ -8,7 +8,9 @@ export default async function AccountOrdersPage() {
   const supabase = await createClient();
   const { data: orders } = await supabase
     .from("orders")
-    .select("id, order_number, status, total, created_at, order_items(product_name, variant_label, quantity)")
+    .select(
+      "id, order_number, status, total, created_at, payment_method, order_items(product_name, variant_label, quantity)"
+    )
     .order("created_at", { ascending: false });
 
   if (!orders || orders.length === 0) {
@@ -31,7 +33,9 @@ export default async function AccountOrdersPage() {
               </p>
             </div>
             <div className="text-right">
-              <p className="text-sm capitalize text-ink">{order.status}</p>
+              <p className="text-sm capitalize text-ink">
+                {orderStatusLabel(order.status, order.payment_method)}
+              </p>
               <p className="text-sm text-ink-soft">{formatINR(order.total)}</p>
             </div>
           </div>

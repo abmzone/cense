@@ -122,6 +122,7 @@ export default async function AdminOrderDetailPage({
             orderId={order.id}
             currentStatus={order.status}
             currentTracking={order.tracking_number}
+            paymentMethod={order.payment_method}
           />
           <ShippingLabelButton
             orderId={order.id}

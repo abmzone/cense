@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { formatINR } from "@/lib/utils";
+import { formatINR, orderStatusLabel } from "@/lib/utils";
 import type { OrderStatus } from "@/lib/types";
 
 export interface AdminOrderRow {
@@ -140,7 +140,7 @@ export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
                   {order.shipping_address?.full_name || order.email}
                 </td>
                 <td className="py-3 capitalize text-ink-soft">
-                  {order.status}
+                  {orderStatusLabel(order.status, order.payment_method)}
                   {isStuck(order) && <span className="ml-2 text-maroon">⚠ stuck</span>}
                 </td>
                 <td className="py-3 text-right text-ink">{formatINR(order.total)}</td>
