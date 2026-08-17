@@ -12,7 +12,7 @@ export async function POST(request: Request) {
 
   try {
     const [totals, settings] = await Promise.all([
-      computeOrderTotals(lines, couponCode, paymentMode === "COD" ? "cod" : "razorpay"),
+      computeOrderTotals(lines, couponCode, paymentMode === "COD" ? "cod" : "razorpay", postalCode),
       getSettings(),
     ]);
 

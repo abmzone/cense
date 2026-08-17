@@ -20,7 +20,7 @@ export async function POST(request: Request) {
 
   let totals;
   try {
-    totals = await computeOrderTotals(lines, couponCode, "cod");
+    totals = await computeOrderTotals(lines, couponCode, "cod", shippingAddress?.postal_code);
   } catch {
     return NextResponse.json({ error: "Could not verify order contents." }, { status: 400 });
   }

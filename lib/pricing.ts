@@ -4,6 +4,16 @@ import { getSettings } from "./data/settings";
 /** Flat surcharge for paying cash on delivery, in paise. */
 export const COD_SURCHARGE = 2000;
 
+/** Flat shipping rate for Guwahati city pincodes, in paise. */
+export const GUWAHATI_SHIPPING_FEE = 3800;
+
+/** Guwahati city pincode range (781001–781040) — Fancy Bazar, Zoo Road, Ganeshguri, Beltola, Dispur, Six Mile, etc. */
+export function isGuwahatiPincode(pincode?: string | null) {
+  if (!pincode || !/^\d{6}$/.test(pincode)) return false;
+  const code = Number(pincode);
+  return code >= 781001 && code <= 781040;
+}
+
 export interface PricedLine {
   productId: string;
   variantId: string;
@@ -35,7 +45,8 @@ export interface OrderTotals {
 export async function computeOrderTotals(
   lines: { variantId: string; quantity: number }[],
   couponCode?: string | null,
-  paymentMethod?: "razorpay" | "cod"
+  paymentMethod?: "razorpay" | "cod",
+  destinationPincode?: string | null
 ): Promise<OrderTotals> {
   const admin = createAdminClient();
 
@@ -99,7 +110,11 @@ export async function computeOrderTotals(
   const taxableAmount = subtotal - discount;
 
   const shippingFee =
-    taxableAmount >= settings.free_shipping_threshold ? 0 : settings.standard_shipping_fee;
+    taxableAmount >= settings.free_shipping_threshold
+      ? 0
+      : isGuwahatiPincode(destinationPincode)
+        ? GUWAHATI_SHIPPING_FEE
+        : settings.standard_shipping_fee;
   const tax = Math.round((taxableAmount * settings.tax_rate_percent) / 100);
   const codFee = paymentMethod === "cod" ? COD_SURCHARGE : 0;
   const total = taxableAmount + shippingFee + tax + codFee;

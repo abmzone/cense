@@ -30,7 +30,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const totals = await computeOrderTotals(lines, couponCode, "razorpay");
+    const totals = await computeOrderTotals(lines, couponCode, "razorpay", destinationPincode);
 
     if (totals.belowMinimumOrder) {
       return NextResponse.json(
