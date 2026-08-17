@@ -90,6 +90,8 @@ export default async function AdminOrderDetailPage({
               {address?.country}
               <br />
               {order.phone}
+              <br />
+              {order.email}
             </p>
           </div>
 

@@ -9,6 +9,7 @@ export interface AdminOrderRow {
   id: string;
   order_number: string;
   email: string;
+  shipping_address: { full_name?: string } | null;
   status: OrderStatus;
   total: number;
   created_at: string;
@@ -46,11 +47,13 @@ export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
   const stuckCount = useMemo(() => orders.filter(isStuck).length, [orders]);
 
   const filtered = useMemo(() => {
+    const term = search.toLowerCase();
     return orders.filter((order) => {
       const matchesSearch =
         !search ||
-        order.order_number.toLowerCase().includes(search.toLowerCase()) ||
-        order.email.toLowerCase().includes(search.toLowerCase());
+        order.order_number.toLowerCase().includes(term) ||
+        order.email.toLowerCase().includes(term) ||
+        (order.shipping_address?.full_name ?? "").toLowerCase().includes(term);
       const matchesStatus = statusFilter === "all" || order.status === statusFilter;
       return matchesSearch && matchesStatus;
     });
@@ -86,7 +89,7 @@ export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
       )}
       <div className="flex flex-wrap items-center gap-3">
         <input
-          placeholder="Search order number or email"
+          placeholder="Search order number, name or email"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="border border-ink/20 bg-transparent px-3 py-2 text-sm focus:border-maroon focus:outline-none"
@@ -116,7 +119,7 @@ export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
           <thead>
             <tr className="border-b border-line text-left text-xs uppercase tracking-widest text-ink-soft">
               <th className="pb-3">Order</th>
-              <th className="pb-3">Email</th>
+              <th className="pb-3">Name</th>
               <th className="pb-3">Status</th>
               <th className="pb-3 text-right">Total</th>
               <th className="pb-3 text-right">Date</th>
@@ -133,7 +136,9 @@ export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
                     {order.order_number}
                   </Link>
                 </td>
-                <td className="py-3 text-ink-soft">{order.email}</td>
+                <td className="py-3 text-ink-soft">
+                  {order.shipping_address?.full_name || order.email}
+                </td>
                 <td className="py-3 capitalize text-ink-soft">
                   {order.status}
                   {isStuck(order) && <span className="ml-2 text-maroon">⚠ stuck</span>}
