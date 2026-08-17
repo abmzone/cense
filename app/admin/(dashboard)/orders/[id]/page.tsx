@@ -4,6 +4,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { OrderStatusForm } from "@/components/admin/order-status-form";
 import { ShippingLabelButton } from "@/components/admin/shipping-label-button";
 import { formatINR } from "@/lib/utils";
+import { COD_SURCHARGE } from "@/lib/pricing";
 
 export default async function AdminOrderDetailPage({
   params,
@@ -20,6 +21,12 @@ export default async function AdminOrderDetailPage({
     .eq("order_id", id);
 
   const address = order.shipping_address as Record<string, string>;
+
+  // shipping_fee is stored as a single combined column, with the COD
+  // surcharge folded in for COD orders at write time — split it back out
+  // here so the breakdown doesn't look like an unexplained shipping cost.
+  const codFee = order.payment_method === "cod" ? COD_SURCHARGE : 0;
+  const shippingOnly = order.shipping_fee - codFee;
 
   return (
     <div>
@@ -63,8 +70,14 @@ export default async function AdminOrderDetailPage({
             )}
             <div className="flex justify-between">
               <span>Shipping</span>
-              <span>{formatINR(order.shipping_fee)}</span>
+              <span>{formatINR(shippingOnly)}</span>
             </div>
+            {codFee > 0 && (
+              <div className="flex justify-between">
+                <span>Cash on Delivery Fee</span>
+                <span>{formatINR(codFee)}</span>
+              </div>
+            )}
             {order.tax > 0 && (
               <div className="flex justify-between">
                 <span>Tax</span>

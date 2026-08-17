@@ -3,6 +3,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { PrintButton } from "@/components/admin/print-button";
 import { formatINR } from "@/lib/utils";
 import { SITE } from "@/lib/constants";
+import { COD_SURCHARGE } from "@/lib/pricing";
 
 export default async function InvoicePage({ params }: PageProps<"/admin/orders/[id]/invoice">) {
   const { id } = await params;
@@ -13,6 +14,9 @@ export default async function InvoicePage({ params }: PageProps<"/admin/orders/[
 
   const { data: items } = await admin.from("order_items").select("*").eq("order_id", id);
   const address = order.shipping_address as Record<string, string>;
+
+  const codFee = order.payment_method === "cod" ? COD_SURCHARGE : 0;
+  const shippingOnly = order.shipping_fee - codFee;
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-16">
@@ -85,8 +89,14 @@ export default async function InvoicePage({ params }: PageProps<"/admin/orders/[
         )}
         <div className="flex justify-between text-ink-soft">
           <span>Shipping</span>
-          <span>{formatINR(order.shipping_fee)}</span>
+          <span>{formatINR(shippingOnly)}</span>
         </div>
+        {codFee > 0 && (
+          <div className="flex justify-between text-ink-soft">
+            <span>Cash on Delivery Fee</span>
+            <span>{formatINR(codFee)}</span>
+          </div>
+        )}
         {order.tax > 0 && (
           <div className="flex justify-between text-ink-soft">
             <span>Tax</span>
