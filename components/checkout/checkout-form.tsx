@@ -148,6 +148,10 @@ export function CheckoutForm({ codEnabled }: Props) {
         order_id: data.orderId,
         prefill: { name: form.fullName, email: form.email, contact: form.phone },
         theme: { color: "#5b1a24" },
+        // Without this, a stalled bank/UPI confirmation can leave the
+        // checkout modal showing "Confirming payment..." indefinitely if
+        // Razorpay never resolves it to either success or payment.failed.
+        timeout: 300,
         handler: async (response) => {
           try {
             const verifyRes = await fetch("/api/razorpay/verify", {
@@ -164,7 +168,10 @@ export function CheckoutForm({ codEnabled }: Props) {
             reject(err);
           }
         },
-        modal: { ondismiss: () => reject(new Error("Payment was cancelled.")) },
+        modal: {
+          ondismiss: () =>
+            reject(new Error("Payment was not completed. Please try again.")),
+        },
       });
       // Timeouts and declines don't always reach `handler` — this is the
       // only reliable way to catch those and surface a clear failure

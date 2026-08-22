@@ -40,5 +40,7 @@ export interface RazorpayOptions {
   }) => void;
   prefill?: { name?: string; email?: string; contact?: string };
   theme?: { color?: string };
+  /** Seconds the checkout session may stay open before Razorpay force-closes it. */
+  timeout?: number;
   modal?: { ondismiss?: () => void };
 }
